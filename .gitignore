@@ -1,5 +1,5 @@
 node_modules
 public/bundle.js
-.DS-Store
-.log
-.eot
+.DS_Store
+*.log
+*.eot
