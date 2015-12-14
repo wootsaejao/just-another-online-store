@@ -8,7 +8,7 @@ jQuery = $ = window.jQuery = window.$ =  require('jquery/dist/jquery.min');
 require('bootstrap/dist/js/bootstrap.min')
 
 // custom style
-require("!style!css!sass!./style.scss")
+require('!style!css!sass!./style.scss')
 
 
 render(
