@@ -42,6 +42,5 @@ module.exports = {
         console.log('Webpack Dev Server is listening at ' + webpackDevHost + ':' + webpackDevPort)
       }
     )
-    console.log(webpackDevServer)
   }
 }
