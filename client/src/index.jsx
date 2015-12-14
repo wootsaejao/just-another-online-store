@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
+
 import { render } from 'react-dom'
 import App from './components/App'
 
@@ -9,7 +10,6 @@ require('bootstrap/dist/js/bootstrap.min')
 
 // custom style
 require('!style!css!sass!./style.scss')
-
 
 render(
   <App />,

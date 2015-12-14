@@ -6,6 +6,9 @@ module.exports = {
     './client/src/index.jsx'
   ],
   module: {
+    preLoaders: [
+      {test: /\.jsx?$/, loader: 'eslint-loader', exclude: /node_modules/}
+    ],
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
