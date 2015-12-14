@@ -1,14 +1,14 @@
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
-var baseConfig = require('./webpack.config')
+import webpack from 'webpack'
+import WebpackDevServer from 'webpack-dev-server'
+import baseConfig from './webpack.config'
 
-var webpackDevHost = '0.0.0.0'
+const webpackDevHost = '0.0.0.0'
 
 module.exports = {
   listen(serverPort) {
     const webpackDevPort = serverPort + 1
 
-    var config = Object.create(baseConfig)
+    let config = Object.create(baseConfig)
 
     config.entry = config.entry.concat([
       'webpack-dev-server/client?http://localhost:' + webpackDevPort,
