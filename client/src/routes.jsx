@@ -1,6 +1,7 @@
 import React from 'react'
-import { Route } from 'react-router'
-import Homepage from './containers/Homepage'
+import { Route, Router } from 'react-router'
+import HomePage from './containers/HomePage'
+import AboutPage from './containers/AboutPage'
 
 // const routes = (
 //   <Route path="/" component={App}>
@@ -11,7 +12,10 @@ import Homepage from './containers/Homepage'
 //   </Route>
 // )
 const routes = (
-  <Route path="/" component={Homepage} />
+  <Router>
+    <Route path="/" component={HomePage} />
+    <Route path="about" component={AboutPage} />
+  </Router>
 )
 
 export default routes
