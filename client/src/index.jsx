@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Application from './containers/Application'
+import Application from './Application'
 import createStore from './redux/createStore'
 
 // This section is for webpack asset loader
