@@ -1,7 +1,7 @@
-import React from 'react' // eslint-disable-line no-unused-vars
-
+import React from 'react'
 import { render } from 'react-dom'
-import App from './components/App'
+import Application from './containers/Application'
+import createStore from './redux/createStore'
 
 // This section is for webpack asset loader
 // bootstrap css
@@ -14,7 +14,9 @@ require('bootstrap/dist/css/bootstrap.min.css')
 // custom style
 require('!style!css!sass!./style.scss')
 
+const store = createStore()
+
 render(
-  <App />,
+  <Application store={store} />,
   document.getElementById('app')
 )
