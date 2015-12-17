@@ -9,7 +9,6 @@ My attempt in the world of asynchronicity
 git clone https://github.com/wootsaejao/just-another-online-store.git
 cd just-another-online-store
 npm install
-npm run build
 ```
 
 ### Development
