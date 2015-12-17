@@ -6,9 +6,12 @@
   "scripts": {
     "test": "mocha {server,client} --recursive --compilers js:babel-register",
     "test:watch": "npm run test -- --watch",
-    "dev": "NODE_ENV=development node .",
+    "webpackDevServer": "NODE_ENV=development webpack-dev-server --config webpackDevServer.js",
+    "hapiDevServer": "NODE_ENV=development nodemon --watch server/ .",
+    "dev": "npm run webpackDevServer & npm run hapiDevServer",
     "build": "webpack -p --progress",
-    "start": "node ."
+    "start": "node .",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,7 +25,9 @@
   },
   "homepage": "https://github.com/wootsaejao/just-another-online-store#readme",
   "dependencies": {
+    "boom": "^3.0.0",
     "bootstrap": "^3.3.6",
+    "h2o2": "^5.0.0",
     "hapi": "^11.1.2",
     "history": "^1.13.1",
     "inert": "^3.2.0",
@@ -32,6 +37,7 @@
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.1",
     "react-router": "^1.0.2",
+    "react-router-bootstrap": "^0.19.3",
     "redux": "^3.0.5",
     "redux-router": "^1.0.0-beta5"
   },

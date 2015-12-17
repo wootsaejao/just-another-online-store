@@ -13,9 +13,3 @@ server.start(function(err) {
   }
   console.log('Hapi Server is running at:', server.info.uri)
 })
-
-// webpack dev server
-if (process.env.NODE_ENV != 'production') {
-  var webpackDevServer = require('./webpackDevServer')
-  webpackDevServer.listen(PORT)
-}

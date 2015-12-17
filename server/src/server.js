@@ -1,4 +1,5 @@
 import Hapi from 'hapi'
+import Boom from 'boom'
 // import Routes from './routes'
 
 const server = new Hapi.Server()
@@ -10,30 +11,57 @@ module.exports = (port) => {
     routes: { cors: true }
   })
 
-  // serve static files
   server.register(
-    require('inert'),
+    [
+      require('inert'),
+      require('h2o2')
+    ],
     (err) => {
       if (err) {
         throw err
       }
 
+      //
+      // Handle static files
+      //
       server.route({
         method: 'GET',
         path: '/{param*}',
-        handler: {
-          directory: {
-            path: 'public',
-            index: ['index.html']
+        handler: (request, reply) => {
+          const param = request.params.param
+          if (param === 'index.html') {
+            reply(Boom.notFound())
+          } else {
+            if (process.env.NODE_ENV !== 'production') {
+              // proxy to webpack dev server
+              reply.proxy({
+                host: 'localhost',
+                port: port + 1,
+                protocol: 'http'
+              })
+            } else {
+              reply.file('./static/' + param)
+            }
           }
         }
       })
 
+      //
+      // Index
+      //
       server.route({
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
-          reply.file('./public/index.html')
+          reply(`
+            <!DOCTYPE html>
+            <html>
+            <body>
+              <div id="app"></div>
+              <script src="bundle.js"></script>
+            </body>
+            </html>
+          `)
         }
       })
     }
