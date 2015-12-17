@@ -1,21 +1,13 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import { reduxReactRouter, routerStateReducer } from 'redux-router'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { reduxReactRouter } from 'redux-router'
 import { createHistory } from 'history'
 import promiseMiddleware from './middleware/promiseMiddleware'
-import * as reducers from './reducers'
-import routes from '../routes'
+import getRoutes from '../routes'
+import reducer from './modules/reducer'
 
 export default function() {
-  // const reducer = combineReducers(reducers)
-  const reducer = combineReducers({
-    router: routerStateReducer,
-    app: reducers
-  })
 
-  // const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore)
-  // const store = finalCreateStore(reducer)
-
-  // const store = applyMiddleware(promiseMiddleware)(createStore)(reducer)
+  const routes = getRoutes()
 
   const store = compose(
     applyMiddleware(promiseMiddleware),

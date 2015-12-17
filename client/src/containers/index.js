@@ -1,0 +1,5 @@
+export App from './App/App'
+export Home from './Home'
+export About from './About'
+export Dashboard from './Dashboard'
+export NotFound from './NotFound'
