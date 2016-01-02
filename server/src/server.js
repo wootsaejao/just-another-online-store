@@ -29,7 +29,6 @@ module.exports = (port) => {
         path: '/{param*}',
         handler: (request, reply) => {
           const param = request.params.param
-
           // prevent accesing index.html file
           if (param === 'index.html') {
             reply(Boom.notFound())
