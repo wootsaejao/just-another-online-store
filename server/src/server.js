@@ -26,7 +26,7 @@ module.exports = (port) => {
       //
       server.route({
         method: 'GET',
-        path: '/{param*}',
+        path: '/static/{param*}',
         handler: (request, reply) => {
           const param = request.params.param
           // prevent accesing index.html file
@@ -52,14 +52,14 @@ module.exports = (port) => {
       //
       server.route({
         method: 'GET',
-        path: '/',
+        path: '/{path*}',
         handler: function (request, reply) {
           reply(`
             <!DOCTYPE html>
             <html>
             <body>
               <div id="app"></div>
-              <script src="bundle.js"></script>
+              <script src="static/bundle.js"></script>
             </body>
             </html>
           `)

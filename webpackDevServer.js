@@ -18,7 +18,7 @@ config.plugins.unshift(
 
 config.devServer = {
   contentBase: config.output.path,
-  publicPath: config.output.publicPath,
+  publicPath: '/static',
   host: host,
   port: port,
   hot: true,
