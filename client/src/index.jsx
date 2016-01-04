@@ -1,10 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { ReduxRouter } from 'redux-router'
 
 import createStore from './store/createStore'
 import getRoutes from './routes'
+import { Root } from './containers'
 
 //
 // load stuff first
@@ -22,8 +21,6 @@ const store = createStore()
 const routes = getRoutes(store)
 
 render(
-  <Provider store={store}>
-    <ReduxRouter routes={routes} />
-  </Provider>,
+  <Root store={store} routes={routes} />,
   document.getElementById('app')
 )

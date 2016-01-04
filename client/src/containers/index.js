@@ -1,3 +1,4 @@
+export Root from './Root/Root'
 export App from './App/App'
 export Home from './Home'
 export About from './About'
