@@ -9,7 +9,6 @@ import {
 
 export default class AppContainer extends Component {
   render() {
-    require('./App.scss')
     const navbarInstance = (
       <Navbar fixedTop>
         <Navbar.Header>
@@ -38,6 +37,7 @@ export default class AppContainer extends Component {
       </Navbar>
     )
 
+    require('./App.scss')
     return (
       <div className="app">
         {navbarInstance}

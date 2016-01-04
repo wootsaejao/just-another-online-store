@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { reduxReactRouter } from 'redux-router'
 import { createHistory } from 'history'
-import promiseMiddleware from './middleware/promiseMiddleware'
+
+import promiseMiddleware from '../lib/promiseMiddleware'
+import reducer from '../reducer'
 import getRoutes from '../routes'
-import reducer from './modules/reducer'
 
 export default function() {
 

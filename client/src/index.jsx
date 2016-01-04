@@ -2,13 +2,21 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ReduxRouter } from 'redux-router'
-// import Application from './Application'
-import createStore from './redux/createStore'
+
+import createStore from './store/createStore'
 import getRoutes from './routes'
 
-// This section is for webpack asset loader
-// bootstrap css
+//
+// load stuff first
+//
+
+// TODO: use CDN
 require('bootstrap/dist/css/bootstrap.min.css')
+
+
+//
+// main app
+//
 
 const store = createStore()
 const routes = getRoutes(store)
