@@ -11,6 +11,7 @@ describe('server', () => {
     }
     server.inject(options, (response) => {
       expect(response.statusCode).to.equal(200)
+      expect(response.headers['content-type']).to.include('html')
       done()
     })
   })
@@ -18,10 +19,11 @@ describe('server', () => {
   it('server response to GET request on bundle.js', (done) => {
     const options = {
       method: 'GET',
-      url: '/bundle.js'
+      url: '/static/bundle.js'
     }
     server.inject(options, (response) => {
       expect(response.statusCode).to.equal(200)
+      expect(response.headers['content-type']).to.include('javascript')
       done()
     })
   })
