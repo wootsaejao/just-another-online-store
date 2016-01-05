@@ -1,8 +1,14 @@
 import Promise from 'bluebird'
 
+import {
+  GET_TIME_REQUEST,
+  GET_TIME_SUCCESS,
+  GET_TIME_FAILURE
+} from '../actionTypes'
+
 export function getTime(delay) {
   return {
-    types: ['GET_TIME_REQUEST', 'GET_TIME_SUCCESS', 'GET_TIME_FAILURE'],
+    types: [GET_TIME_REQUEST, GET_TIME_SUCCESS, GET_TIME_FAILURE],
     promise: () => {
       return new Promise((resolve, reject) => {
         // Just simulating an async request to a server via a setTimeout
