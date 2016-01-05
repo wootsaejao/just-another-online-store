@@ -55,7 +55,9 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    testProp: false
+    testProp: false,
+    testPropFromTime: state.time.testPropFromTime,
+    time: state.time.time
   }
 }
 

@@ -5,7 +5,7 @@ import {
 } from '../actionTypes'
 
 const initialState = {
-  testPropFromTime: false
+  testPropFromTime: 2
 }
 
 export function time(state = initialState, action) {
