@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { createHistory } from 'history'
-import { syncReduxAndRouter } from 'redux-simple-router'
+// import { syncReduxAndRouter } from 'redux-simple-router'
 
 import createStore from './store/createStore'
 import getRoutes from './routes'
@@ -21,7 +21,12 @@ require('bootstrap/dist/css/bootstrap.min.css')
 
 const history = createHistory()
 const store = createStore()
-syncReduxAndRouter(history, store)
+
+// Disable ``syncReduxAndRouter`` for now due to the components render twice
+// and also it always fallback to "/" path.
+// Still don't know how to fix.
+
+// syncReduxAndRouter(history, store)
 
 const routes = getRoutes(history)
 
