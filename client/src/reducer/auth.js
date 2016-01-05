@@ -1,11 +1,12 @@
 import auth from '../lib/auth'
 
-const initialAuthState = {
-  loggedIn: auth.loggedIn()
+const initialState = {
+  loggedIn: false
 }
 
-export function _auth(state = initialAuthState, action) {
-  console.log(action)
+export default function reducer(state = initialState, action) {
+  console.log('auth')
+  console.log(arguments)
   switch (action.type) {
     case 'UPDATE_AUTH_REQUEST':
       return {
@@ -24,6 +25,10 @@ export function _auth(state = initialAuthState, action) {
         frozen: false
       }
     default:
-      return state
+      // return state
+      return {
+        ...state,
+        testDefaultAuth: false
+      }
   }
 }

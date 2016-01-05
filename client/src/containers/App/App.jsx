@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import { connect } from 'react-redux'
@@ -8,12 +9,25 @@ import {
   NavItem
 } from 'react-bootstrap'
 
+import auth from '../../lib/auth'
 import * as TimeActions from '../../actions/TimeActions'
 import * as AuthActions from '../../actions/AuthActions'
 
 class App extends Component {
 
+  componentWillMount() {
+    auth.onChange = this.props.actions.updateAuth
+  }
+
+  handleClick = event => {
+    console.log(event)
+    this.props.actions.updateAuth(true)
+    console.log(this.props)
+  }
+
   render() {
+    console.log('app')
+    console.log(this.props)
     const navbarInstance = (
       <Navbar fixedTop>
         <Navbar.Header>
