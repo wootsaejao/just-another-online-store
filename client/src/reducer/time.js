@@ -2,7 +2,7 @@ const initialTimeState = {
   testPropFromTime: false
 }
 
-export function _time(state = initialTimeState, action) {
+export function time(state = initialTimeState, action) {
   switch (action.type) {
     case 'GET_TIME_REQUEST':
       return {
