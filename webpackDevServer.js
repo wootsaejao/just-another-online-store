@@ -19,9 +19,10 @@ config.plugins.unshift(
 console.log(port)
 
 config.devServer = {
-  // contentBase: config.output.path,
-  contentBase: `http://${host}:${port}/static`,
-  publicPath: `http://${host}:${port}/static`,
+  contentBase: config.output.path,
+  publicPath: config.output.publicPath,
+  // contentBase: `http://${host}:${port}/static`,
+  // publicPath: `http://${host}:${port}/static`,
   host: host,
   port: port,
   hot: true,

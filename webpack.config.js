@@ -26,7 +26,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'static'),
-    // publicPath: '/',
+    publicPath: '/',
     filename: 'bundle.js'
   }
 };

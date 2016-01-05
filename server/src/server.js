@@ -26,7 +26,7 @@ module.exports = (port) => {
       //
       server.route({
         method: 'GET',
-        path: '/static/{param*}',
+        path: '/{param*}',
         handler: (request, reply) => {
           const param = request.params.param
 
@@ -53,14 +53,14 @@ module.exports = (port) => {
       //
       server.route({
         method: 'GET',
-        path: '/{path*}',
+        path: '/',
         handler: function (request, reply) {
           reply(`
             <!DOCTYPE html>
             <html>
             <body>
               <div id="app"></div>
-              <script src="static/bundle.js"></script>
+              <script src="bundle.js"></script>
             </body>
             </html>
           `)
