@@ -13,8 +13,6 @@ import * as TimeActions from '../../actions/TimeActions'
 class App extends Component {
 
   render() {
-    console.log(this.state)
-    console.log(this.props)
     const navbarInstance = (
       <Navbar fixedTop>
         <Navbar.Header>

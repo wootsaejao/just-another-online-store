@@ -5,6 +5,7 @@ import {
 } from '../actionTypes'
 
 const initialState = {
+  time: null,
   testPropFromTime: 2
 }
 
