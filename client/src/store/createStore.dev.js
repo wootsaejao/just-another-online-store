@@ -5,7 +5,7 @@ import promiseMiddleware from '../lib/promiseMiddleware'
 import reducer from '../reducer'
 import DevTools from '../containers/DevTools';
 
-export default function(initialState) {
+export default function() {
 
   const finalCreateStore = compose(
     applyMiddleware(promiseMiddleware),
@@ -17,7 +17,7 @@ export default function(initialState) {
     )
   )(createStore)
 
-  const store = finalCreateStore(reducer, initialState)
+  const store = finalCreateStore(reducer)
 
   if (module.hot) {
     module.hot.accept('../reducer', () =>
