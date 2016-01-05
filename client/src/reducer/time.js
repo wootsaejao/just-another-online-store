@@ -1,4 +1,6 @@
-const initialTimeState = {}
+const initialTimeState = {
+  testPropFromTime: false
+}
 
 export function _time(state = initialTimeState, action) {
   switch (action.type) {

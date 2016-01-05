@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { routerStateReducer } from 'redux-router'
-import time from './time'
+import { routeReducer } from 'redux-simple-router'
+import * as time from './time'
 
-export default combineReducers({
-  router: routerStateReducer,
-  time
-})
+export default combineReducers(Object.assign({},
+  time,
+  { routing: routeReducer }
+))

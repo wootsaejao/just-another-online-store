@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
+import { connect } from 'react-redux'
 import {
   Nav,
   Navbar,
   NavItem
 } from 'react-bootstrap'
 
-export default class AppContainer extends Component {
+import * as TimeActions from '../../actions/TimeActions'
+
+class App extends Component {
+
   render() {
+    console.log(this.state)
+    console.log(this.props)
     const navbarInstance = (
       <Navbar fixedTop>
         <Navbar.Header>
@@ -23,9 +29,6 @@ export default class AppContainer extends Component {
             <LinkContainer to="/dashboard">
               <NavItem eventKey={1}>Dashboard</NavItem>
             </LinkContainer>
-          </Nav>
-
-          <Nav pullRight>
             <LinkContainer to="/about">
               <NavItem eventKey={1}>About</NavItem>
             </LinkContainer>
@@ -47,4 +50,13 @@ export default class AppContainer extends Component {
       </div>
     )
   }
+
 }
+
+function mapStateToProps(state) {
+  return {
+    testProp: false
+  }
+}
+
+export default connect(mapStateToProps, TimeActions)(App)
