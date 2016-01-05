@@ -1,5 +1,5 @@
 module.exports = {
-  
+
   login(email, pass, cb) {
     cb = arguments[arguments.length - 1]
     if (localStorage.token) {
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   loggedIn() {
-    return !!localStorage.token
+    return !!localStorage.token || false
   },
 
   onChange() {}

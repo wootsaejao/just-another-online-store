@@ -1,12 +1,8 @@
 import React from 'react'
 
-import auth from './auth'
+import auth from '../lib/auth'
 
 const Login = React.createClass({
-
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
 
   getInitialState() {
     return {

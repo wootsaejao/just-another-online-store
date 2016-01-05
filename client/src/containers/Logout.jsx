@@ -1,5 +1,7 @@
 import React from 'react'
 
+import auth from '../lib/auth'
+
 const Logout = React.createClass({
   componentDidMount() {
     auth.logout()
