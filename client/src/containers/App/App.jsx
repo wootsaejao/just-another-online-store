@@ -15,7 +15,7 @@ import * as AuthActions from '../../actions/AuthActions'
 class App extends Component {
 
   componentWillMount() {
-    this.props.actions.updateAuth()
+    this.props.actions.checkAuth()
   }
 
   render() {

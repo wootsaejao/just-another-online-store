@@ -9,9 +9,9 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
 
-  UPDATE_AUTH_REQUEST,
-  UPDATE_AUTH_SUCCESS,
-  UPDATE_AUTH_FAILURE
+  CHECK_AUTH_REQUEST,
+  CHECK_AUTH_SUCCESS,
+  CHECK_AUTH_FAILURE
 } from '../actionTypes'
 
 export function login(email, password) {
@@ -47,13 +47,14 @@ export function logout() {
   }
 }
 
-export function updateAuth(loggedIn) {
+export function checkAuth() {
   return {
-    types: [UPDATE_AUTH_REQUEST, UPDATE_AUTH_SUCCESS, UPDATE_AUTH_FAILURE],
+    types: [CHECK_AUTH_REQUEST, CHECK_AUTH_SUCCESS, CHECK_AUTH_FAILURE],
     promise: () => {
       return new Promise((resolve/*, reject*/) => {
+        // TODO: check localStorage token
         resolve({
-          loggedIn: loggedIn
+          // loggedIn: loggedIn
         })
       })
     }
