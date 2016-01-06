@@ -38,7 +38,9 @@ export function login(email, password) {
     types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
     promise: () => {
       return new Promise((resolve, reject) => {
+
         pretendRequest(email, password, (response) => {
+
           if (!!response.authenticated) {
             const token = response.token
             localStorage.onlineStoreSSID = token
@@ -65,6 +67,7 @@ export function logout() {
     types: [LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE],
     promise: () => {
       return new Promise((resolve/*, reject*/) => {
+
         delete localStorage.onlineStoreSSID
         resolve({
           isLoggedIn: false
@@ -75,8 +78,6 @@ export function logout() {
 }
 
 export function checkAuth() {
-  console.log('checkAuth')
-  console.log(localStorage.onlineStoreSSID)
   return {
     types: [CHECK_AUTH_REQUEST, CHECK_AUTH_SUCCESS, CHECK_AUTH_FAILURE],
     promise: () => {
@@ -88,7 +89,9 @@ export function checkAuth() {
           })
         }
 
-        reject({})
+        else {
+          reject({})
+        }
       })
     }
   }

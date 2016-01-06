@@ -55,11 +55,11 @@ export function _auth(state = initialState, action) {
         isLoggedIn: action.result.isLoggedIn,
         ssid: null
       }
-    case LOGOUT_FAILURE:
-      return {
-        ...state,
-        error: true
-      }
+    // case LOGOUT_FAILURE:
+    //   return {
+    //     ...state,
+    //     error: true
+    //   }
 
     case CHECK_AUTH_REQUEST:
       return {
