@@ -9,7 +9,6 @@ import {
   NavItem
 } from 'react-bootstrap'
 
-import auth from '../../lib/auth'
 import * as TimeActions from '../../actions/TimeActions'
 import * as AuthActions from '../../actions/AuthActions'
 
