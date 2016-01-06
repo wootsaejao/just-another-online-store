@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webpackDevServer": "NODE_ENV=development webpack-dev-server --config webpackDevServer.js",
-    "hapiDevServer": "NODE_ENV=development nodemon --watch server/ .",
+    "hapiDevServer": "NODE_ENV=development nodemon --watch server/src/ .",
     "dev": "npm run webpackDevServer & npm run hapiDevServer",
     "test": "NODE_ENV=production mocha {server,client} --recursive --compilers js:babel-register",
     "test:watch": "npm run test -- --watch",
