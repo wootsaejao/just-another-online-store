@@ -44,7 +44,7 @@ describe('server', () => {
   })
 
   //
-  // Still don't know how to handle server instant when testing seperate file.
+  // Still don't know how to handle server instant when testing on a seperate file.
   // So put them all in this file for now.
   //
 
