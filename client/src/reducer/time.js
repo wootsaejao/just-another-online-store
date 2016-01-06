@@ -9,7 +9,7 @@ const initialState = {
   testPropFromTime: 2
 }
 
-export default function reducer(state = initialState, action) {
+export function _time(state = initialState, action) {
   switch (action.type) {
     case GET_TIME_REQUEST:
       return {

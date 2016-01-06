@@ -4,7 +4,7 @@ const initialState = {
   loggedIn: false
 }
 
-export default function reducer(state = initialState, action) {
+export function _auth(state = initialState, action) {
   console.log('auth')
   console.log(arguments)
   switch (action.type) {

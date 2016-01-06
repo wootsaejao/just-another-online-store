@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import {
   Nav,
   Navbar,
@@ -26,8 +26,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('app')
-    console.log(this.props)
     const navbarInstance = (
       <Navbar fixedTop>
         <Navbar.Header>
@@ -68,10 +66,18 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    testProp: false,
-    testPropFromTime: state.time.testPropFromTime,
-    time: state.time.time
+    // time: state._time.time
   }
 }
 
-export default connect(mapStateToProps, TimeActions, AuthActions)(App)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(
+      Object.assign({},
+        AuthActions,
+        TimeActions
+      ), dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
