@@ -14,13 +14,6 @@ class Login extends Component {
     this.props.actions.login(email, pass)
   }
 
-  // componentWillMount = (props) => {
-  //   console.log(props.history)
-  //   // if (!!props.isLoggedIn) {
-  //   //   // props.routing.replace()
-  //   // }
-  // }
-
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -32,8 +25,8 @@ class Login extends Component {
         ) || (
           <p>You are NOT logged in.</p>
         )}
-        {this.props.error && (
-          <p>Bad login  information</p>
+        {this.props.message && (
+          <p>{this.props.message}</p>
         )}
       </form>
     )
@@ -44,7 +37,8 @@ class Login extends Component {
 function mapStateToProps(state) {
   return {
     isLoggedIn: state._auth.isLoggedIn,
-    error: state._auth.error
+    error: state._auth.error,
+    message: state._auth.message
   }
 }
 

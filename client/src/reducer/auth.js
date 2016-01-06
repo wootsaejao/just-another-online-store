@@ -13,7 +13,8 @@ import {
 } from '../actionTypes'
 
 const initialState = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  message: ''
 }
 
 export function _auth(state = initialState, action) {
@@ -22,56 +23,58 @@ export function _auth(state = initialState, action) {
     case LOGIN_REQUEST:
       return {
         ...state,
-        frozen: true
+        loggingIn: true
       }
     case LOGIN_SUCCESS:
       return {
         ...state,
+        loggingIn: false,
         isLoggedIn: action.result.isLoggedIn,
+        ssid: action.result.ssid,
         error: false,
-        frozen: false
+        message: null
       }
     case LOGIN_FAILURE:
       return {
         ...state,
+        loggingIn: false,
+        isLoggedIn: false,
+        ssid: null,
         error: true,
-        frozen: false
+        message: action.error.message
       }
 
     case LOGOUT_REQUEST:
       return {
-        ...state,
-        frozen: true
+        ...state
       }
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        isLoggedIn: action.result.isLoggedIn,
         error: false,
-        frozen: false
+        isLoggedIn: action.result.isLoggedIn,
+        ssid: null
       }
     case LOGOUT_FAILURE:
       return {
         ...state,
-        error: true,
-        frozen: false
+        error: true
       }
 
     case CHECK_AUTH_REQUEST:
       return {
-        ...state,
-        frozen: true
+        ...state
       }
     case CHECK_AUTH_SUCCESS:
       return {
         ...state,
-        isLoggedIn: action.result.isLoggedIn,
-        frozen: false
+        isLoggedIn: true,
+        ssid: action.result.ssid
       }
     case CHECK_AUTH_FAILURE:
       return {
         ...state,
-        frozen: false
+        isLoggedIn: false
       }
 
     default:
