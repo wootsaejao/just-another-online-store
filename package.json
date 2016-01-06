@@ -10,7 +10,8 @@
     "test": "NODE_ENV=production mocha {server,client} --recursive --compilers js:babel-register",
     "test:watch": "npm run test -- --watch",
     "build": "NODE_ENV=production webpack -p --progress",
-    "start": "NODE_ENV=production node ."
+    "start": "NODE_ENV=production node .",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "history": "^1.13.1",
     "inert": "^3.2.0",
     "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",

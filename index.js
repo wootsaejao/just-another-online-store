@@ -4,12 +4,11 @@ require('babel-register')
 
 var PORT = process.env.PORT || 9990
 
-var server = require('./server/src/server.js')(PORT)
+var startServer = require('./server/src/server.js')
 
-// main server
-server.start(function(err) {
+startServer(PORT, function (err, serverInstant) {
   if (err) {
     throw err
   }
-  console.log('Hapi Server is running at:', server.info.uri)
+  console.log('Hapi Server is running at:', serverInstant.info.uri)
 })

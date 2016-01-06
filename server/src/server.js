@@ -1,10 +1,10 @@
 import Hapi from 'hapi'
 import Boom from 'boom'
-// import Routes from './routes'
+import api from './api'
 
 const server = new Hapi.Server()
 
-module.exports = (port) => {
+module.exports = (port, callback) => {
   server.connection({
     host: '0.0.0.0',
     port: port,
@@ -70,8 +70,11 @@ module.exports = (port) => {
   )
 
   // all other routes
-  // server.route(Routes)
+  server.route(api)
 
-  return server
+  server.start(function(err) {
+    callback(err, server)
+  })
+
 
 }
