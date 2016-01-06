@@ -1,3 +1,7 @@
+//
+// This file is for referencing purpose, grab from redux-tutorial
+//
+
 import {
   GET_TIME_REQUEST,
   GET_TIME_SUCCESS,
