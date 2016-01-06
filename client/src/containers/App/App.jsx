@@ -19,11 +19,9 @@ class App extends Component {
     auth.onChange = this.props.actions.updateAuth
   }
 
-  handleClick = event => {
-    console.log(event)
-    this.props.actions.updateAuth(true)
-    console.log(this.props)
-  }
+  // handleClick = event => {
+  //   this.props.actions.updateAuth(true)
+  // }
 
   render() {
     const navbarInstance = (
@@ -66,7 +64,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    // time: state._time.time
+    time: state._time.time
   }
 }
 

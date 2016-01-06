@@ -1,12 +1,10 @@
-import auth from '../lib/auth'
+// import auth from '../lib/auth'
 
 const initialState = {
   loggedIn: false
 }
 
 export function _auth(state = initialState, action) {
-  console.log('auth')
-  console.log(arguments)
   switch (action.type) {
     case 'UPDATE_AUTH_REQUEST':
       return {

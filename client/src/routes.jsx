@@ -13,7 +13,6 @@ import {
 } from './containers'
 
 function requireAuth(nextState, replaceState) {
-  console.log(auth.loggedIn())
   if (!auth.loggedIn())
     replaceState({ nextPathname: nextState.location.pathname }, '/login')
 }
@@ -26,6 +25,7 @@ export default (history) => {
 
         { /* Private routes */ }
         <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+        <Route path="logout" component={Logout} onEnter={requireAuth} />
 
         { /* Public routes */ }
         <Route path="about" component={About} />
