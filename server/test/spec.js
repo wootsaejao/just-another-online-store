@@ -69,6 +69,23 @@ describe('server', () => {
       })
     })
 
+    it('login with invalid password', (done) => {
+      const options = {
+        method: 'POST',
+        url: '/api/auth/login',
+        payload: {
+          email: 'joe@example.com',
+          password: 'intentional_invalid_password'
+        }
+      }
+      server.inject(options, (response) => {
+        expect(response.statusCode).to.equal(401)
+        expect(response.result.message).to.equal('invalid password')
+        expect(response.result.ssid).to.not.exist
+        done()
+      })
+    })
+
     it('check for exisiting ssid', (done) => {
       const options = {
         method: 'POST',
