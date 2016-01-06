@@ -101,7 +101,7 @@ describe('server', () => {
       })
     })
 
-    it('check for wrong ssid', (done) => {
+    it('check auth with unexisted ssid', (done) => {
       const options = {
         method: 'POST',
         url: '/api/auth/check',
