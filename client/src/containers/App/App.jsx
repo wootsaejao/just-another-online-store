@@ -71,11 +71,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(
-      Object.assign({},
-        AuthActions,
-        TimeActions
-      ), dispatch)
+    actions: bindActionCreators(AuthActions, dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
