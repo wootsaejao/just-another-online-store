@@ -1,33 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-// import auth from '../lib/auth'
+import * as AuthActions from '../actions/AuthActions'
 
 class Login extends Component {
 
-  // getInitialState() {
-  //   return {
-  //     error: false
-  //   }
-  // }
-  //
-  // handleSubmit(event) {
-  //   event.preventDefault()
-  //
-  //   const email = this.refs.email.value
-  //   const pass = this.refs.pass.value
-  //
-  //   auth.login(email, pass, (loggedIn) => {
-  //     if (!loggedIn)
-  //       return this.setState({ error: true })
-  //
-  //     const { location } = this.props
-  //
-  //     if (location.state && location.state.nextPathname) {
-  //       this.context.router.replace(location.state.nextPathname)
-  //     } else {
-  //       this.context.router.replace('/')
-  //     }
-  //   })
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(this.props)
+    console.log(typeof this.props.actions.login)
+
+    const email = this.refs.email.value
+    const pass = this.refs.pass.value
+
+    this.props.actions.login(email, pass)
+  }
+
+  // componentWillMount = (props) => {
+  //   console.log(props.history)
+  //   // if (!!props.isLoggedIn) {
+  //   //   // props.routing.replace()
+  //   // }
   // }
 
   render() {
@@ -36,8 +30,13 @@ class Login extends Component {
         <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
         <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
         <button type="submit">login</button>
-        {this.state.error && (
-          <p>Bad login information</p>
+        {this.props.isLoggedIn && (
+          <p>You are logged in.</p>
+        ) || (
+          <p>You are NOT logged in.</p>
+        )}
+        {this.props.error && (
+          <p>Bad login  information</p>
         )}
       </form>
     )
@@ -45,4 +44,17 @@ class Login extends Component {
 
 }
 
-export default Login
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: state._auth.isLoggedIn,
+    error: state._auth.error
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(AuthActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

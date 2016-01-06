@@ -28,7 +28,7 @@ const store = createStore()
 
 // syncReduxAndRouter(history, store)
 
-const routes = getRoutes(history)
+const routes = getRoutes(history, store.dispatch, store.getState)
 
 render(
   <Root store={store} routes={routes} />,

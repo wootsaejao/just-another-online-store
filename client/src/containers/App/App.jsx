@@ -41,9 +41,15 @@ class App extends Component {
             <LinkContainer to="/about">
               <NavItem eventKey={1}>About</NavItem>
             </LinkContainer>
-            <LinkContainer to="/login">
-              <NavItem eventKey={2}>Login</NavItem>
-            </LinkContainer>
+            {this.props.isLoggedIn ? (
+              <LinkContainer to="/logout">
+                <NavItem eventKey={3}>Log out</NavItem>
+              </LinkContainer>
+            ) : (
+              <LinkContainer to="/login">
+                <NavItem eventKey={2}>Login</NavItem>
+              </LinkContainer>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -64,7 +70,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    time: state._time.time
+    isLoggedIn: state._auth.isLoggedIn
   }
 }
 

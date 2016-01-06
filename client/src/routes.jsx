@@ -12,12 +12,14 @@ import {
   NotFound
 } from './containers'
 
-function requireAuth(nextState, replaceState) {
-  if (!auth.loggedIn())
-    replaceState({ nextPathname: nextState.location.pathname }, '/login')
-}
+export default (history, dispatch, getState) => {
 
-export default (history) => {
+  function requireAuth(nextState, replaceState) {
+    if (!getState()._auth.isLoggedIn) {
+      replaceState({ nextPathname: nextState.location.pathname }, '/login')
+    }
+  }
+
   return (
     <Router history={history}>
       <Route path="/" component={App}>

@@ -1,11 +1,31 @@
 // import auth from '../lib/auth'
 
 const initialState = {
-  loggedIn: false
+  isLoggedIn: false
 }
 
 export function _auth(state = initialState, action) {
   switch (action.type) {
+
+    case 'LOGIN_REQUEST':
+      return {
+        ...state,
+        frozen: true
+      }
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        isLoggedIn: action.result.isLoggedIn,
+        error: false,
+        frozen: false
+      }
+    case 'LOGIN_FAILURE':
+      return {
+        ...state,
+        error: true,
+        frozen: false
+      }
+
     case 'UPDATE_AUTH_REQUEST':
       return {
         ...state,
@@ -14,7 +34,7 @@ export function _auth(state = initialState, action) {
     case 'UPDATE_AUTH_SUCCESS':
       return {
         ...state,
-        loggedIn: action.result.loggedIn,
+        isLoggedIn: action.result.isLoggedIn,
         frozen: false
       }
     case 'UPDATE_AUTH_FAILURE':
@@ -22,11 +42,8 @@ export function _auth(state = initialState, action) {
         ...state,
         frozen: false
       }
+
     default:
-      // return state
-      return {
-        ...state,
-        testDefaultAuth: false
-      }
+      return state
   }
 }
