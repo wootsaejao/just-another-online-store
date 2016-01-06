@@ -26,6 +26,25 @@ export function _auth(state = initialState, action) {
         frozen: false
       }
 
+    case 'LOGOUT_REQUEST':
+      return {
+        ...state,
+        frozen: true
+      }
+    case 'LOGOUT_SUCCESS':
+      return {
+        ...state,
+        isLoggedIn: action.result.isLoggedIn,
+        error: false,
+        frozen: false
+      }
+    case 'LOGOUT_FAILURE':
+      return {
+        ...state,
+        error: true,
+        frozen: false
+      }
+
     case 'UPDATE_AUTH_REQUEST':
       return {
         ...state,

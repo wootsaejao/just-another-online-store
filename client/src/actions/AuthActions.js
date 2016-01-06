@@ -1,18 +1,5 @@
 import Promise from 'bluebird'
 
-export function updateAuth(loggedIn) {
-  return {
-    types: ['UPDATE_AUTH_REQUEST', 'UPDATE_AUTH_SUCCESS', 'UPDATE_AUTH_FAILURE'],
-    promise: () => {
-      return new Promise((resolve/*, reject*/) => {
-        resolve({
-          loggedIn: loggedIn
-        })
-      })
-    }
-  }
-}
-
 export function login(email, password) {
   return {
     types: ['LOGIN_REQUEST', 'LOGIN_SUCCESS', 'LOGIN_FAILURE'],
@@ -28,6 +15,32 @@ export function login(email, password) {
             msg: 'Incorrect email and password.'
           })
         }
+      })
+    }
+  }
+}
+
+export function logout() {
+  return {
+    types: ['LOGOUT_REQUEST', 'LOGOUT_SUCCESS', 'LOGOUT_FAILURE'],
+    promise: () => {
+      return new Promise((resolve/*, reject*/) => {
+        resolve({
+          isLoggedIn: false
+        })
+      })
+    }
+  }
+}
+
+export function updateAuth(loggedIn) {
+  return {
+    types: ['UPDATE_AUTH_REQUEST', 'UPDATE_AUTH_SUCCESS', 'UPDATE_AUTH_FAILURE'],
+    promise: () => {
+      return new Promise((resolve/*, reject*/) => {
+        resolve({
+          loggedIn: loggedIn
+        })
       })
     }
   }
