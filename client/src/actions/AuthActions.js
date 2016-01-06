@@ -15,27 +15,29 @@ import {
   CHECK_AUTH_FAILURE
 } from '../actionTypes'
 
-function _login(email, password, cb) {
+function _login(email, password/*, cb*/) {
   const payload = {
     email: email,
     password: password
   }
 
-  jQuery.post('api/auth/login', payload)
-    .done((response) => {
-      console.log(response)
-      cb({
-        authenticated: true,
-        token: Math.random().toString(36).substring(7)
+  return new Promise((resolve, reject) => {
+
+    jQuery.post('api/auth/login', payload)
+      .done((result) => {
+        resolve({
+          authenticated: true,
+          token: result.ssid
+        })
       })
-    })
-    .fail((response) => {
-      console.log(response)
-      cb({
-        authenticated: false,
-        message: response.responseJSON.message
+      .fail((error) => {
+        reject({
+          authenticated: false,
+          message: error.responseJSON.message
+        })
       })
-    })
+
+  })
 }
 
 export function login(email, password) {
@@ -44,24 +46,22 @@ export function login(email, password) {
     promise: () => {
       return new Promise((resolve, reject) => {
 
-        _login(email, password, (response) => {
-
-          if (!!response.authenticated) {
-            const token = response.token
+        _login(email, password)
+          .then((result) => {
+            const token = result.token
             localStorage.onlineStoreSSID = token
             resolve({
               isLoggedIn: true,
               ssid: token
             })
-          }
-
-          else {
+          })
+          .catch((error) => {
             reject({
               isLoggedIn: false,
-              message: response.message
+              message: error.message
             })
-          }
-        })
+          })
+
       })
     }
   }
