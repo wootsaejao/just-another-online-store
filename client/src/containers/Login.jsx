@@ -8,12 +8,9 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.props)
-    console.log(typeof this.props.actions.login)
 
     const email = this.refs.email.value
     const pass = this.refs.pass.value
-
     this.props.actions.login(email, pass)
   }
 

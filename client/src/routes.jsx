@@ -1,7 +1,6 @@
 import React from 'react'
 import { Router, Route, IndexRoute } from 'react-router'
 
-import auth from './lib/auth'
 import {
   App,
   Home,
