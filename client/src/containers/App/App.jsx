@@ -16,12 +16,8 @@ import * as AuthActions from '../../actions/AuthActions'
 class App extends Component {
 
   componentWillMount() {
-    auth.onChange = this.props.actions.updateAuth
+    this.props.actions.updateAuth()
   }
-
-  // handleClick = event => {
-  //   this.props.actions.updateAuth(true)
-  // }
 
   render() {
     const navbarInstance = (
@@ -83,5 +79,4 @@ function mapDispatchToProps(dispatch) {
       ), dispatch)
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(App)
