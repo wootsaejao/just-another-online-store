@@ -1,4 +1,5 @@
 import Promise from 'bluebird'
+// import { pushPath } from 'redux-simple-router'
 
 import {
   LOGIN_REQUEST,

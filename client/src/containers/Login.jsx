@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { pushPath } from 'redux-simple-router'
 
 import * as AuthActions from '../actions/AuthActions'
 
 class Login extends Component {
+
+  componentDidUpdate = (/*prevProps, prevState*/) => {
+    if (!!this.props.isLoggedIn) {
+      // redirect to '/dashboard' in 2.5 seconds
+      setTimeout(() => this.props.actions.pushPath('/dashboard'), 2500)
+    }
+  }
 
   handleSubmit = (event) => {
     event.preventDefault()
 
     const email = this.refs.email.value
     const pass = this.refs.pass.value
+
     this.props.actions.login(email, pass)
   }
 
@@ -20,11 +29,6 @@ class Login extends Component {
         <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
         <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
         <button type="submit">login</button>
-        {this.props.isLoggedIn && (
-          <p>You are logged in.</p>
-        ) || (
-          <p>You are NOT logged in.</p>
-        )}
         {this.props.message && (
           <p>{this.props.message}</p>
         )}
@@ -44,7 +48,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(AuthActions, dispatch)
+    actions: bindActionCreators(Object.assign({}, AuthActions, { pushPath }), dispatch)
   }
 }
 

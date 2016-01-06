@@ -5,17 +5,13 @@ import {
 
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
 
   CHECK_AUTH_REQUEST,
   CHECK_AUTH_SUCCESS,
   CHECK_AUTH_FAILURE
 } from '../actionTypes'
 
-const initialState = {
-  isLoggedIn: false,
-  message: ''
-}
+const initialState = {}
 
 export function _auth(state = initialState, action) {
   switch (action.type) {
@@ -32,7 +28,7 @@ export function _auth(state = initialState, action) {
         isLoggedIn: action.result.isLoggedIn,
         ssid: action.result.ssid,
         error: false,
-        message: null
+        message: 'You are now logged in. Redirecting to dashboard...'
       }
     case LOGIN_FAILURE:
       return {
@@ -53,7 +49,8 @@ export function _auth(state = initialState, action) {
         ...state,
         error: false,
         isLoggedIn: action.result.isLoggedIn,
-        ssid: null
+        ssid: null,
+        message: null
       }
     // case LOGOUT_FAILURE:
     //   return {
