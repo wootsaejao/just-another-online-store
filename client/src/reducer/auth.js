@@ -1,3 +1,5 @@
+import { UPDATE_PATH } from 'redux-simple-router'
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -16,6 +18,12 @@ const initialState = {}
 export function _auth(state = initialState, action) {
   switch (action.type) {
 
+    case UPDATE_PATH:
+      return {
+        ...state,
+        message: null
+      }
+
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -28,7 +36,7 @@ export function _auth(state = initialState, action) {
         isLoggedIn: action.result.isLoggedIn,
         ssid: action.result.ssid,
         error: false,
-        message: 'You are now logged in. Redirecting to dashboard...'
+        message: null
       }
     case LOGIN_FAILURE:
       return {
@@ -48,9 +56,8 @@ export function _auth(state = initialState, action) {
       return {
         ...state,
         error: false,
-        isLoggedIn: action.result.isLoggedIn,
-        ssid: null,
-        message: null
+        isLoggedIn: false,
+        ssid: null
       }
     // case LOGOUT_FAILURE:
     //   return {
@@ -66,12 +73,15 @@ export function _auth(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: true,
-        ssid: action.result.ssid
+        ssid: action.result.ssid,
+        message: null
       }
     case CHECK_AUTH_FAILURE:
       return {
         ...state,
-        isLoggedIn: false
+        isLoggedIn: false,
+        ssid: null,
+        message: null
       }
 
     default:

@@ -70,9 +70,7 @@ export function logout() {
       return new Promise((resolve/*, reject*/) => {
 
         delete localStorage.onlineStoreSSID
-        resolve({
-          isLoggedIn: false
-        })
+        resolve({})
       })
     }
   }

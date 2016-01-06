@@ -9,7 +9,6 @@ class Login extends Component {
 
   componentDidUpdate = (/*prevProps, prevState*/) => {
     if (!!this.props.isLoggedIn) {
-      // redirect to '/dashboard' in 2.5 seconds
       setTimeout(() => this.props.actions.pushPath('/dashboard'), 2500)
     }
   }
@@ -29,6 +28,9 @@ class Login extends Component {
         <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
         <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
         <button type="submit">login</button>
+        {this.props.isLoggedIn && (
+          <p>You are now logged in. Redirecting to dashboard...</p>
+        )}
         {this.props.message && (
           <p>{this.props.message}</p>
         )}
