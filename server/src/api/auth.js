@@ -4,6 +4,7 @@ import Boom from 'boom'
 let userSessions = {}
 
 function handleLogin(request, reply) {
+  console.log('someone log in')
   // WARNING: this should be only used via HTTPS
 
   const email = request.payload.email
@@ -16,10 +17,15 @@ function handleLogin(request, reply) {
     // Store sessions
     userSessions[email] = ssid
 
+    console.log('log in reply')
     reply({
       message: 'success',
       ssid: ssid
     })
+  }
+
+  else {
+    reply(Boom.unauthorized('invalid password'))
   }
 }
 

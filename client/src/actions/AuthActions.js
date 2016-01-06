@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-// import { pushPath } from 'redux-simple-router'
+import jQuery from 'jquery'
 
 import {
   LOGIN_REQUEST,
@@ -15,23 +15,27 @@ import {
   CHECK_AUTH_FAILURE
 } from '../actionTypes'
 
-function pretendRequest(email, pass, cb) {
-  setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
+function _login(email, password, cb) {
+  const payload = {
+    email: email,
+    password: password
+  }
+
+  jQuery.post('api/auth/login', payload)
+    .done((response) => {
+      console.log(response)
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7)
       })
-    }
-
-    else {
+    })
+    .fail((response) => {
+      console.log(response)
       cb({
         authenticated: false,
-        message: 'Cannot authenticate.'
+        message: response.responseJSON.message
       })
-    }
-
-  }, 0)
+    })
 }
 
 export function login(email, password) {
@@ -40,7 +44,7 @@ export function login(email, password) {
     promise: () => {
       return new Promise((resolve, reject) => {
 
-        pretendRequest(email, password, (response) => {
+        _login(email, password, (response) => {
 
           if (!!response.authenticated) {
             const token = response.token
