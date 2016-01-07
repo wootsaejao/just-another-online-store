@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { pushPath } from 'redux-simple-router'
+import * as AuthActions from '../actions/AuthActions'
 
 class Logout extends Component {
 
   componentDidMount = (/*prevProps, prevState*/) => {
-    setTimeout(() => this.props.actions.pushPath('/'), 2500)
+    //
+    // Do this so that user can logout via '/logout' url
+    //
+    this.props.actions.logout()
   }
 
   render() {
-    return <p>You are now logged out. Redirecting to homepage...</p>
+    return <p>You are now logged out.</p>
 
   }
 
@@ -22,7 +25,7 @@ function mapStateToProps(/*state*/) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ pushPath }, dispatch)
+    actions: bindActionCreators(AuthActions, dispatch)
   }
 }
 

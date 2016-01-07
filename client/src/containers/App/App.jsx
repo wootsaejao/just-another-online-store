@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import { bindActionCreators } from 'redux'
-import { pushPath } from 'redux-simple-router'
 import {
   Nav,
   Navbar,
@@ -16,13 +15,6 @@ class App extends Component {
 
   componentWillMount = () => {
     this.props.actions.checkAuth()
-  }
-
-  handleLogout = (event) => {
-    event.preventDefault()
-
-    this.props.actions.logout()
-    this.props.actions.pushPath('/logout')
   }
 
   render() {
@@ -59,7 +51,9 @@ class App extends Component {
             </LinkContainer>
           )}
           {this.props.isLoggedIn && (
-            <NavItem eventKey={3} onClick={this.handleLogout}>Log out</NavItem>
+            <LinkContainer to="/logout">
+              <NavItem eventKey={1}>Log out</NavItem>
+            </LinkContainer>
           )}
         </Nav>
       </Navbar>
@@ -89,10 +83,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({},
-      AuthActions,
-      { pushPath }
-    ), dispatch)
+    actions: bindActionCreators(AuthActions, dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

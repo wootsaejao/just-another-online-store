@@ -61,28 +61,31 @@ module.exports = (port, callback) => {
       server.route({
         method: 'GET',
         path: '/static/{param*}',
-        handler: (request, reply) => {
+        config: {
+          auth: false,
+          handler: (request, reply) => {
 
-          const param = request.params.param
+            const param = request.params.param
 
-          // prevent accesing index.html file
-          if (param === 'index.html') {
-            reply(Boom.notFound())
-          }
+            // prevent accesing index.html file
+            if (param === 'index.html') {
+              reply(Boom.notFound())
+            }
 
-          if (process.env.NODE_ENV !== 'production') {
+            if (process.env.NODE_ENV !== 'production') {
 
-            // proxy to webpack dev server
-            reply.proxy({
-              host: 'localhost',
-              port: port + 1,
-              protocol: 'http'
-            })
-          }
+              // proxy to webpack dev server
+              reply.proxy({
+                host: 'localhost',
+                port: port + 1,
+                protocol: 'http'
+              })
+            }
 
-          else {
+            else {
 
-            reply.file('./static/' + param)
+              reply.file('./static/' + param)
+            }
           }
         }
       })
@@ -93,25 +96,28 @@ module.exports = (port, callback) => {
       server.route({
         method: 'GET',
         path: '/{param*}',
-        handler: function (request, reply) {
-          reply(`
-            <!DOCTYPE html>
-            <html>
-            <body>
+        config: {
+          auth: false,
+          handler: (request, reply) => {
+            reply(`
+              <!DOCTYPE html>
+              <html>
+              <body>
               <div id="app"></div>
               <script src="static/bundle.js"></script>
-            </body>
-            </html>
-          `)
-        }
-      })
-    }
+              </body>
+              </html>
+              `)
+            }
+          }
+        })
+      }
   )
 
   // all other routes
   server.route(api)
 
-  server.start(function(err) {
+  server.start((err) => {
     callback(err, server)
   })
 

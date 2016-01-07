@@ -26,11 +26,11 @@ export default (history, dispatch, getState) => {
 
         { /* Private routes */ }
         <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
-        <Route path="logout" component={Logout} onEnter={requireAuth} />
 
         { /* Public routes */ }
         <Route path="about" component={About} />
         <Route path="login" component={Login} />
+        <Route path="logout" component={Logout} />
 
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404} />
