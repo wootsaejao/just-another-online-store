@@ -1,4 +1,4 @@
-## Generate database file
+## Generate sample database file
 
 Use [NeDB](https://github.com/louischatriot/nedb) for now
 
