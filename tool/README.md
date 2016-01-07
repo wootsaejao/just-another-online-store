@@ -14,4 +14,8 @@ python3 product_csv_to_json.py
 node product_json_to_nedb.js
 ```
 
-The generated file will be available at ``__build__/database.db``
+The generated file will be available at ``__build__/products.db``
+
+```
+cp __build__/products.db ../server/database/
+```
