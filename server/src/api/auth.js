@@ -3,30 +3,62 @@ import Boom from 'boom'
 
 let userSessions = {}
 
+const users = {
+    'joe@example.com': {
+        email: 'joe@example.com',
+        password: 'password1',
+        name: 'John Doe'
+    }
+};
+
 function handleLogin(request, reply) {
   // WARNING: this should be only used via HTTPS
+
+  let account = null
+  console.log(request.auth)
+
+  // alreay authenticated
+  if (request.auth.isAuthenticated) {
+
+    return reply({
+      message: 'already authenticated'
+    })
+  }
+
+  // missing payload
+  if (!request.payload.email || !request.payload.password) {
+
+    return reply(Boom.badRequest('Missing username or password'))
+  }
 
   const email = request.payload.email
   const password = request.payload.password
 
-  // TODO: use persistence
-  if (email === 'joe@example.com' && password === 'password1') {
+  // get user data from database
+  account = users[email];
 
-    const ssid = Math.random().toString(36).substring(7)
+  // if (email === 'joe@example.com' && password === 'password1') {
+  if (!account || account.password !== password) {
 
-    // Store sessions
-    userSessions[email] = ssid
-
-    reply({
-      message: 'success',
-      ssid: ssid
-    })
+    return reply(Boom.badRequest('Invalid username or password'))
   }
 
-  else {
+  const ssid = Math.random().toString(36).substring(7)
 
-    reply(Boom.unauthorized('invalid password'))
-  }
+  // Store sessions
+  userSessions[email] = ssid
+
+  return reply({
+    message: 'success',
+    ssid: ssid
+  })
+
+  // }
+
+  // else {
+  //
+  //   return reply(Boom.unauthorized('Invalid email or password'))
+  // }
 }
 
 function handleCheckAuth(request, reply) {
@@ -61,54 +93,6 @@ function handleLogout(request, reply) {
   })
 }
 
-// const login = function (request, reply) {
-//
-//     if (request.auth.isAuthenticated) {
-//         return reply.redirect('/');
-//     }
-//
-//     let message = '';
-//     let account = null;
-//
-//     if (request.method === 'post') {
-//
-//         if (!request.payload.username ||
-//             !request.payload.password) {
-//
-//             message = 'Missing username or password';
-//         }
-//         else {
-//             account = users[request.payload.username];
-//             if (!account ||
-//                 account.password !== request.payload.password) {
-//
-//                 message = 'Invalid username or password';
-//             }
-//         }
-//     }
-//
-//     if (request.method === 'get' ||
-//         message) {
-//
-//         return reply('<html><head><title>Login page</title></head><body>'
-//             + (message ? '<h3>' + message + '</h3><br/>' : '')
-//             + '<form method="post" action="/login">'
-//             + 'Username: <input type="text" name="username"><br>'
-//             + 'Password: <input type="password" name="password"><br/>'
-//             + '<input type="submit" value="Login"></form></body></html>');
-//     }
-//
-//     const sid = String(++uuid);
-//     request.server.app.cache.set(sid, { account: account }, 0, (err) => {
-//
-//         if (err) {
-//             return reply(err);
-//         }
-//
-//         request.cookieAuth.set({ sid: sid });
-//         return reply.redirect('/');
-//     });
-// };
 //
 // const logout = function (request, reply) {
 //
@@ -120,7 +104,10 @@ export default [
   {
     method: 'POST',
     path: '/api/auth/login',
-    handler: handleLogin
+    config: {
+      auth: { mode: 'try' },
+      handler: handleLogin
+    }
   },
   {
     method: 'POST',
