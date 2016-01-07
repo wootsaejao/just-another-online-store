@@ -11,6 +11,7 @@ function handleLogin(request, reply) {
 
   // TODO: use persistence
   if (email === 'joe@example.com' && password === 'password1') {
+
     const ssid = Math.random().toString(36).substring(7)
 
     // Store sessions
@@ -23,21 +24,25 @@ function handleLogin(request, reply) {
   }
 
   else {
+
     reply(Boom.unauthorized('invalid password'))
   }
 }
 
 function handleCheckAuth(request, reply) {
+
   const ssid = request.payload.ssid
   const userSessionValues = _.values(userSessions)
 
   if (_.includes(userSessionValues, ssid)) {
+
     reply({
       message: 'authenticated'
     })
   }
 
   else {
+
     reply(Boom.notFound('The provided SSID does not belong to sessions.'))
   }
 }

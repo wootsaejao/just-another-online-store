@@ -5,6 +5,7 @@ import api from './api'
 const server = new Hapi.Server()
 
 module.exports = (port, callback) => {
+
   server.connection({
     host: '0.0.0.0',
     port: port,
@@ -14,9 +15,11 @@ module.exports = (port, callback) => {
   server.register(
     [
       require('inert'),
-      require('h2o2')
+      require('h2o2'),
+      require('hapi-auth-cookie')
     ],
     (err) => {
+
       if (err) {
         throw err
       }
@@ -28,6 +31,7 @@ module.exports = (port, callback) => {
         method: 'GET',
         path: '/static/{param*}',
         handler: (request, reply) => {
+
           const param = request.params.param
 
           // prevent accesing index.html file
@@ -36,13 +40,17 @@ module.exports = (port, callback) => {
           }
 
           if (process.env.NODE_ENV !== 'production') {
+
             // proxy to webpack dev server
             reply.proxy({
               host: 'localhost',
               port: port + 1,
               protocol: 'http'
             })
-          } else {
+          }
+
+          else {
+
             reply.file('./static/' + param)
           }
         }
@@ -75,6 +83,5 @@ module.exports = (port, callback) => {
   server.start(function(err) {
     callback(err, server)
   })
-
 
 }
