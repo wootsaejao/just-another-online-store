@@ -2,14 +2,32 @@
 import Boom from 'boom'
 import Datastore from 'nedb'
 import path from 'path'
+import Joi from 'joi'
+import _ from 'lodash'
 
 const productsDBPath = path.resolve(__dirname, '../../database/products.db')
 var db = new Datastore({ filename: productsDBPath })
 
 function handleGetProducts(request, reply) {
+
+  const limit = request.query.limit || 10
+  const excludeImage = request.query['excludeImage'] === 'true' || false
+
   db.loadDatabase((err) => {
-    db.find({}).limit(2).exec((err, docs) => {
-      reply(docs)
+
+    db.find({}).limit(limit).exec((err, docs) => {
+
+      if (excludeImage) {
+
+        return reply(docs.map((doc) => {
+            return _.omit(doc, 'image')
+          })
+        )
+      }
+
+      else {
+        return reply(docs)
+      }
     })
   })
 }
@@ -23,7 +41,15 @@ export default [
   {
     method: 'GET',
     path: '/api/products',
-    config: { auth: false },
+    config: {
+      auth: false,
+      validate: {
+        query: {
+          limit: Joi.number().integer(),
+          excludeImage: Joi.string()
+        }
+      },
+    },
     handler: handleGetProducts
   },
   // {
@@ -42,12 +68,3 @@ export default [
   //   handler: handleDeleteProduct
   // },
 ]
-
-// export default [{
-//   method: 'GET',
-//   path: '/api/products',
-//   config: { auth: false },
-//   handler: (request, response) => {
-//     reply('peoducts')
-//   }
-// }]

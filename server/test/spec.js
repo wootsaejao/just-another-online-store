@@ -157,13 +157,39 @@ describe('server', () => {
 
   describe('products api', () => {
 
-    it('get all products', (done) => {
+    it('get products', (done) => {
       const options = {
         method: 'GET',
         url: '/api/products',
       }
       server.inject(options, (response) => {
-        console.log(response.result)
+        expect(response.statusCode).to.equal(200)
+        expect(response.result).to.have.length(10)
+        done()
+      })
+    })
+
+    it('get products with params', (done) => {
+      const options = {
+        method: 'GET',
+        url: '/api/products?limit=1',
+      }
+      server.inject(options, (response) => {
+        expect(response.statusCode).to.equal(200)
+        expect(response.result).to.have.length(1)
+        done()
+      })
+    })
+
+    it('get products, exclude image', (done) => {
+      const options = {
+        method: 'GET',
+        url: '/api/products?excludeImage=true',
+      }
+      server.inject(options, (response) => {
+        if (!!response.result) {
+          expect(response.result).not.to.have.any.keys('image')
+        }
         expect(response.statusCode).to.equal(200)
         done()
       })
