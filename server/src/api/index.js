@@ -1,5 +1,4 @@
 import auth from './auth'
+import products from './products'
 
-export default Array.prototype.concat.apply([],
-  auth
-)
+export default [].concat(auth, products)

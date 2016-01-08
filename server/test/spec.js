@@ -17,6 +17,10 @@ describe('server', () => {
     })
   })
 
+  //
+  // Basic server operation
+  //
+
   describe('serving content', () => {
     it('server response to GET request on root path', (done) => {
       const options = {
@@ -46,6 +50,10 @@ describe('server', () => {
   //
   // Still don't know how to handle server instant when testing on a seperate file.
   // So put them all in this file for now.
+  //
+
+  //
+  // Auth API
   //
 
   describe('auth api', () => {
@@ -139,6 +147,26 @@ describe('server', () => {
     //   })
     // })
 
+
+
+  })
+
+  //
+  // Product API
+  //
+
+  describe('products api', () => {
+
+    it('get all products', (done) => {
+      const options = {
+        method: 'GET',
+        url: '/api/products',
+      }
+      server.inject(options, (response) => {
+        expect(response.statusCode).to.equal(200)
+        done()
+      })
+    })
   })
 
 })
