@@ -18,12 +18,6 @@ const initialState = {}
 export function _auth(state = initialState, action) {
   switch (action.type) {
 
-    case UPDATE_PATH:
-      return {
-        ...state,
-        message: null
-      }
-
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -59,11 +53,6 @@ export function _auth(state = initialState, action) {
         isLoggedIn: false,
         ssid: null
       }
-    // case LOGOUT_FAILURE:
-    //   return {
-    //     ...state,
-    //     error: true
-    //   }
 
     case CHECK_AUTH_REQUEST:
       return {
