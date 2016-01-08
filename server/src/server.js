@@ -4,7 +4,7 @@ import Boom from 'boom'
 const server = new Hapi.Server()
 
 const HapiAuthCookiePassword = 'very_securly_secret_passsword_do_not_let_anyone_know'
-const HapiAuthCookie = 'sid-example'
+export const HapiAuthCookie = 'sid-example'
 
 module.exports = (port, callback) => {
 

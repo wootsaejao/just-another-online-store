@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import startServer from '../src/server'
+import startServer, { HapiAuthCookie } from '../src/server'
 
 let server
 
@@ -50,6 +50,7 @@ describe('server', () => {
 
   describe('auth api', () => {
     let sid
+    let cookie
 
     it('allow user to login', (done) => {
       const options = {
@@ -64,7 +65,11 @@ describe('server', () => {
         expect(response.statusCode).to.equal(200)
         expect(response.result.message).to.equal('success')
         expect(response.result.sid).to.exist
+
+        const header = response.headers['set-cookie'];
+        cookie = header[0].match(/(?:[^\x00-\x20\(\)<>@\,;\:\\"\/\[\]\?\=\{\}\x7F]+)\s*=\s*(?:([^\x00-\x20\"\,\;\\\x7F]*))/);
         sid = response.result.sid
+
         done()
       })
     })
@@ -87,18 +92,23 @@ describe('server', () => {
     })
 
     // it('check for exisiting sid', (done) => {
-    //   const options = {
+    //   let options = {
     //     method: 'POST',
     //     url: '/api/auth/check',
+    //     headers: {
+    //       cookie: HapiAuthCookie + '=' + cookie[1]
+    //     },
     //     payload: {
     //       sid: sid
     //     }
     //   }
+    //
     //   server.inject(options, (response) => {
     //     expect(response.statusCode).to.equal(200)
     //     expect(response.result.message).to.equal('authenticated')
     //     done()
     //   })
+    //
     // })
 
     // it('check auth with unexisted sid', (done) => {
