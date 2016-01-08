@@ -26,13 +26,11 @@ function _login(email, password/*, cb*/) {
     jQuery.post('api/auth/login', payload)
       .done((result) => {
         resolve({
-          authenticated: true,
           token: result.sid
         })
       })
       .fail((error) => {
         reject({
-          authenticated: false,
           message: error.responseJSON.message
         })
       })
@@ -50,14 +48,10 @@ export function login(email, password) {
           .then((result) => {
             const token = result.token
             localStorage.onlineStoreSID = token
-            resolve({
-              isLoggedIn: true,
-              sid: token
-            })
+            resolve()
           })
           .catch((error) => {
             reject({
-              isLoggedIn: false,
               message: error.message
             })
           })
@@ -71,15 +65,11 @@ function _logout() {
   return new Promise((resolve, reject) => {
 
     jQuery.get('api/auth/logout')
-      .done((result) => {
-        resolve({
-          authenticated: true,
-          token: result.sid
-        })
+      .done((/*result*/) => {
+        resolve()
       })
       .fail((error) => {
         reject({
-          authenticated: false,
           message: error.responseJSON.message
         })
       })
@@ -134,8 +124,7 @@ export function checkAuth() {
         const sid = localStorage.onlineStoreSID || null
 
         _checkAuth(sid)
-          .then((result) => {
-            console.log(result)
+          .then((/*result*/) => {
             resolve()
           })
           .catch((error) => {

@@ -26,7 +26,7 @@ export function _auth(state = initialState, action) {
       return {
         ...state,
         loggingIn: false,
-        isLoggedIn: action.result.isLoggedIn,
+        isLoggedIn: true,
         error: false,
         message: null
       }
@@ -41,17 +41,20 @@ export function _auth(state = initialState, action) {
 
     case LOGOUT_REQUEST:
       return {
-        ...state
+        ...state,
+        loggingOut: true
       }
     case LOGOUT_SUCCESS:
       return {
         ...state,
+        loggingOut: false,
         error: false,
         isLoggedIn: false
       }
     case LOGOUT_FAILURE:
       return {
         ...state,
+        loggingOut: false,
         error: true,
         message: action.error.message
       }
