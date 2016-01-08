@@ -12,6 +12,8 @@ export function getTime(delay) {
     types: [GET_TIME_REQUEST, GET_TIME_SUCCESS, GET_TIME_FAILURE],
     promise: () => {
       return new Promise((resolve/*, reject*/) => {
+
+        // $.get('api/products',
         resolve({
 
         })

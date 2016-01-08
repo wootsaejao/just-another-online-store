@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux';
 
-import * as ProductActions from '../../actions/ProductActions'
+// import * as ProductActions from '../../actions/ProductActions'
 
 class Home extends Component {
   render() {
@@ -22,4 +22,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Root)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
