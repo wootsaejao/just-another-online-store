@@ -56,6 +56,16 @@ module.exports = (port, callback) => {
       });
 
       //
+      // Favicon
+      //
+      server.route({
+         method: 'GET',
+         path: '/favicon.ico',
+         handler: { file: './static/img/favicon.ico' },
+         config: { auth: false }
+       })
+
+      //
       // Handle static files
       //
       server.route({
