@@ -24,14 +24,19 @@ with open('sample_csv/sample-product-with-image.csv') as csvfile:
 
         # generate image file
         if row['image']:
-            productName = '_'.join(row['name'].lower().split())
-            imageFileName = '{}.png'.format(productName)
 
-            imageData = base64.b64decode(row['image'])
-            with open('__build__/img/' + imageFileName, "wb") as imageFile:
-                imageFile.write(imageData)
+        #     productName = '_'.join(row['name'].lower().split())
+        #     imageFileName = '{}.png'.format(productName)
+        #
+        #     imageData = base64.b64decode(row['image'])
+        #     with open('__build__/img/' + imageFileName, "wb") as imageFile:
+        #         imageFile.write(imageData)
+        #
+        #     productDict['image'] = imageFileName
 
-            productDict['image'] = imageFileName
+            # productDict['image'] = 'data:image/png;base64,{}'.format(row['image'])
+            productDict['image'] = row['image']
+
 
         products += [productDict]
 
