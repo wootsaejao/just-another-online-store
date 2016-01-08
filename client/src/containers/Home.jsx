@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { Provider, connect } from 'react-redux';
+// import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
 
 // import * as ProductActions from '../../actions/ProductActions'
 
@@ -16,9 +16,9 @@ function mapStateToProps(/*state*/) {
   return {}
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(/*dispatch*/) {
   return {
-    actions: bindActionCreators(ProductActions, dispatch)
+    // actions: bindActionCreators(ProductActions, dispatch)
   }
 }
 

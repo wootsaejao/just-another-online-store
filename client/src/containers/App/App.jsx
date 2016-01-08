@@ -2,21 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { bindActionCreators } from 'redux'
 import {
   Nav,
   Navbar,
   NavItem
 } from 'react-bootstrap'
 
-import * as AuthActions from '../../actions/AuthActions'
-
 class App extends Component {
-
-  // componentWillMount = () => {
-  //   console.log('checkAuth')
-  //   this.props.actions.checkAuth()
-  // }
 
   render() {
     const navbarInstance = (
@@ -82,9 +74,7 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(AuthActions, dispatch)
-  }
+function mapDispatchToProps(/*dispatch*/) {
+  return {}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

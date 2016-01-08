@@ -1,56 +1,34 @@
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap'
 
-const tableInstance = (
-  <Table responsive>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-    </tbody>
-  </Table>
-)
-
 export default class TableWidget extends Component {
   render() {
     return (
       <div>
-        {tableInstance}
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.products.map((product) => {
+              return (
+                <tr>
+                  <td>{!!product.image && (
+                    <img src={'data:image/png;base64,' + product.image} />
+                  )}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.category}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
       </div>
     )
   }

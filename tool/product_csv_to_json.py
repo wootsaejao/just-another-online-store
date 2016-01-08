@@ -22,9 +22,9 @@ with open('sample_csv/sample-product-with-image.csv') as csvfile:
         productDict['price'] = row['list_price']
         productDict['category'] = row['public_categ_ids/id'].split('.')[-1]
 
-        # generate image file
-        if row['image']:
-
+        # # generate image file
+        # if row['image']:
+        #
         #     productName = '_'.join(row['name'].lower().split())
         #     imageFileName = '{}.png'.format(productName)
         #
@@ -34,9 +34,7 @@ with open('sample_csv/sample-product-with-image.csv') as csvfile:
         #
         #     productDict['image'] = imageFileName
 
-            # productDict['image'] = 'data:image/png;base64,{}'.format(row['image'])
-            productDict['image'] = row['image']
-
+        productDict['image'] = row['image']
 
         products += [productDict]
 
