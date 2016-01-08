@@ -1,6 +1,5 @@
 import Hapi from 'hapi'
 import Boom from 'boom'
-import api from './api'
 
 const server = new Hapi.Server()
 
@@ -53,75 +52,80 @@ module.exports = (port, callback) => {
             return callback(null, true, cached.account);
           });
         }
-      });
-
-      //
-      // Favicon
-      //
-      server.route({
-         method: 'GET',
-         path: '/favicon.ico',
-         config: { auth: false },
-         handler: { file: './static/img/favicon.ico' }
-       })
-
-      //
-      // Handle static files
-      //
-      server.route({
-        method: 'GET',
-        path: '/static/{param*}',
-        config: { auth: false },
-        handler: (request, reply) => {
-
-          const param = request.params.param
-
-          // prevent accesing index.html file
-          if (param === 'index.html') {
-            reply(Boom.notFound())
-          }
-
-          if (process.env.NODE_ENV !== 'production') {
-
-            // proxy to webpack dev server
-            reply.proxy({
-              host: 'localhost',
-              port: port + 1,
-              protocol: 'http'
-            })
-          }
-
-          else {
-
-            reply.file('./static/' + param)
-          }
-        }
       })
 
-      //
-      // Index
-      //
-      server.route({
-        method: 'GET',
-        path: '/{param*}',
-        config: { auth: false },
-        handler: (request, reply) => {
-          reply(`
-            <!DOCTYPE html>
-            <html>
-            <body>
-            <div id="app"></div>
-            <script src="static/bundle.js"></script>
-            </body>
-            </html>
-            `)
+
+      server.route([
+
+        //
+        // Favicon
+        //
+        {
+          method: 'GET',
+          path: '/favicon.ico',
+          config: { auth: false },
+          handler: { file: './static/img/favicon.ico' }
+        },
+
+        //
+        // Handle static files
+        //
+        {
+          method: 'GET',
+          path: '/static/{param*}',
+          config: { auth: false },
+          handler: (request, reply) => {
+
+            const param = request.params.param
+
+            // prevent accesing index.html file
+            if (param === 'index.html') {
+              reply(Boom.notFound())
+            }
+
+            if (process.env.NODE_ENV !== 'production') {
+
+              // proxy to webpack dev server
+              reply.proxy({
+                host: 'localhost',
+                port: port + 1,
+                protocol: 'http'
+              })
+            }
+
+            else {
+
+              reply.file('./static/' + param)
+            }
           }
-        })
+        },
+
+        //
+        // Index
+        //
+        {
+          method: 'GET',
+          path: '/{param*}',
+          config: { auth: false },
+          handler: (request, reply) => {
+            reply(`
+              <!DOCTYPE html>
+              <html>
+              <body>
+              <div id="app"></div>
+              <script src="static/bundle.js"></script>
+              </body>
+              </html>
+              `
+            )
+          }
+        }
+      ])
 
       //
-      // Other routes
+      // API
       //
-      server.route(api)
+      server.route(require('./api').default)
 
     }
   )
