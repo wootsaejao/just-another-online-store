@@ -11,13 +11,13 @@ var db = new Datastore({ filename: productsDBPath })
 function handleGetProducts(request, reply) {
 
   const limit = request.query.limit || 10
-  const excludeImage = request.query['excludeImage'] === 'true' || false
+  const includeImage = request.query['includeImage'] === 'true' || false
 
   db.loadDatabase((err) => {
 
     db.find({}).limit(limit).exec((err, docs) => {
 
-      if (excludeImage) {
+      if (!includeImage) {
 
         return reply(docs.map((doc) => {
             return _.omit(doc, 'image')
@@ -46,7 +46,7 @@ export default [
       validate: {
         query: {
           limit: Joi.number().integer(),
-          excludeImage: Joi.string()
+          includeImage: Joi.string()
         }
       },
     },

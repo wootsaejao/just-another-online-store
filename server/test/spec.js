@@ -177,20 +177,7 @@ describe('server', () => {
       server.inject(options, (response) => {
         expect(response.statusCode).to.equal(200)
         expect(response.result).to.have.length(1)
-        done()
-      })
-    })
-
-    it('get products, exclude image', (done) => {
-      const options = {
-        method: 'GET',
-        url: '/api/products?excludeImage=true',
-      }
-      server.inject(options, (response) => {
-        if (!!response.result) {
-          expect(response.result).not.to.have.any.keys('image')
-        }
-        expect(response.statusCode).to.equal(200)
+        expect(response.result).not.to.have.any.keys('image')
         done()
       })
     })
