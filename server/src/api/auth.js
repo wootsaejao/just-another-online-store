@@ -34,7 +34,7 @@ function handleLogin(request, reply) {
   const password = request.payload.password
 
   // get user data from database
-  account = users[email];
+  const account = users[email];
 
   if (!account || account.password !== password) {
 
