@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { Provider, connect } from 'react-redux';
 
-export default class Root extends Component {
+import * as AuthActions from '../../actions/AuthActions'
+
+class Root extends Component {
+
+  componentWillMount = () => {
+    this.props.actions.checkAuth()
+  }
+
   render() {
     const { store, routes } = this.props;
     return (
@@ -11,3 +19,14 @@ export default class Root extends Component {
     );
   }
 }
+
+function mapStateToProps(/*state*/) {
+  return {}
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(AuthActions, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Root)

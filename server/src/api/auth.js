@@ -61,46 +61,28 @@ function handleLogin(request, reply) {
 }
 
 function handleCheckAuth(request, reply) {
+  if (request.auth.isAuthenticated &&
+      request.payload.sid === request.auth.artifacts.sid) { // quite naive
 
-  const sid = request.payload.sid
-  const userSessionValues = _.values(userSessions)
-
-  if (_.includes(userSessionValues, sid)) {
-
-    reply({
-      message: 'authenticated'
-    })
+    return reply()
   }
 
   else {
 
-    reply(Boom.notFound('The provided SSID does not belong to sessions.'))
+    request.cookieAuth.clear();
+    return reply(Boom.unauthorized())
   }
+
 }
 
 function handleLogout(request, reply) {
-  // const sid = request.payload.sid
-  //
-  // // Remove sid from sessions
-  // // TODO: use persistence
-  // userSessions = _.omit(userSessions, (value) => {
-  //   return value === sid
-  // })
 
-  console.log(request.cookieAuth)
   request.cookieAuth.clear();
 
   reply({
     message: 'success'
   })
 }
-
-//
-// const logout = function (request, reply) {
-//
-//     request.cookieAuth.clear();
-//     return reply.redirect('/');
-// };
 
 export default [
   {
@@ -118,8 +100,10 @@ export default [
   {
     method: 'GET',
     path: '/api/auth/logout',
+    config: { auth: { mode: 'try' } },
     handler: handleLogout
   },
+
   {
     method: 'GET',
     path: '/api/auth/tryauth',

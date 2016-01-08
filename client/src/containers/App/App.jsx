@@ -13,10 +13,10 @@ import * as AuthActions from '../../actions/AuthActions'
 
 class App extends Component {
 
-  componentWillMount = () => {
-    console.log('checkAuth')
-    this.props.actions.checkAuth()
-  }
+  // componentWillMount = () => {
+  //   console.log('checkAuth')
+  //   this.props.actions.checkAuth()
+  // }
 
   render() {
     const navbarInstance = (

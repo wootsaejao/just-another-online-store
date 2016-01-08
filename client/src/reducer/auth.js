@@ -27,7 +27,6 @@ export function _auth(state = initialState, action) {
         ...state,
         loggingIn: false,
         isLoggedIn: action.result.isLoggedIn,
-        sid: action.result.sid,
         error: false,
         message: null
       }
@@ -36,7 +35,6 @@ export function _auth(state = initialState, action) {
         ...state,
         loggingIn: false,
         isLoggedIn: false,
-        sid: null,
         error: true,
         message: action.error.message
       }
@@ -49,8 +47,7 @@ export function _auth(state = initialState, action) {
       return {
         ...state,
         error: false,
-        isLoggedIn: false,
-        sid: null
+        isLoggedIn: false
       }
     case LOGOUT_FAILURE:
       return {
@@ -67,14 +64,12 @@ export function _auth(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: true,
-        sid: action.result.sid,
         message: null
       }
     case CHECK_AUTH_FAILURE:
       return {
         ...state,
         isLoggedIn: false,
-        sid: null,
         message: null
       }
 

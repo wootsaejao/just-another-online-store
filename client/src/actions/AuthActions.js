@@ -68,19 +68,16 @@ export function login(email, password) {
 }
 
 function _logout() {
-
   return new Promise((resolve, reject) => {
 
     jQuery.get('api/auth/logout')
       .done((result) => {
-        console.log(result)
         resolve({
           authenticated: true,
           token: result.sid
         })
       })
       .fail((error) => {
-        console.log(error)
         reject({
           authenticated: false,
           message: error.responseJSON.message
@@ -97,9 +94,9 @@ export function logout() {
       return new Promise((resolve, reject) => {
 
         _logout()
-          .then((result) => {
+          .then((/*result*/) => {
             delete localStorage.onlineStoreSID
-            resolve({})
+            resolve()
           })
           .catch((error) => {
             reject({
@@ -112,21 +109,42 @@ export function logout() {
   }
 }
 
+function _checkAuth(sid) {
+  return new Promise((resolve, reject) => {
+
+    jQuery.post('api/auth/check', { sid: sid })
+      .done((/*result*/) => {
+        resolve()
+      })
+      .fail((error) => {
+        reject({
+          message: error.responseJSON.message
+        })
+      })
+
+  })
+}
+
 export function checkAuth() {
   return {
     types: [CHECK_AUTH_REQUEST, CHECK_AUTH_SUCCESS, CHECK_AUTH_FAILURE],
     promise: () => {
       return new Promise((resolve, reject) => {
 
-        if (!!localStorage.onlineStoreSID) {
-          resolve({
-            sid: localStorage.onlineStoreSID
-          })
-        }
+        const sid = localStorage.onlineStoreSID || null
 
-        else {
-          reject({})
-        }
+        _checkAuth(sid)
+          .then((result) => {
+            console.log(result)
+            resolve()
+          })
+          .catch((error) => {
+            delete localStorage.onlineStoreSID
+            reject({
+              message: error.message
+            })
+          })
+
       })
     }
   }

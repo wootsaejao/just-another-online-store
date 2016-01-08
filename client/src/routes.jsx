@@ -14,7 +14,7 @@ import {
 export default (history, dispatch, getState) => {
 
   function requireAuth(nextState, replaceState) {
-    console.log('requireAuth')
+    // TODO: figure out how to wait for checkAuth() before below lines get executed
     if (!getState()._auth.isLoggedIn) {
       replaceState({ nextPathname: nextState.location.pathname }, '/login')
     }
