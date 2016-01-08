@@ -14,6 +14,7 @@ import {
 export default (history, dispatch, getState) => {
 
   function requireAuth(nextState, replaceState) {
+    console.log('requireAuth')
     if (!getState()._auth.isLoggedIn) {
       replaceState({ nextPathname: nextState.location.pathname }, '/login')
     }

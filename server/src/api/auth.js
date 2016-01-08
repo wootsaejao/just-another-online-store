@@ -3,6 +3,8 @@ import Boom from 'boom'
 
 let userSessions = {}
 
+// let uuid = 1;       // Use seq instead of proper unique identifiers for demo only
+
 const users = {
     'joe@example.com': {
         email: 'joe@example.com',
@@ -37,36 +39,33 @@ function handleLogin(request, reply) {
   // get user data from database
   account = users[email];
 
-  // if (email === 'joe@example.com' && password === 'password1') {
   if (!account || account.password !== password) {
 
     return reply(Boom.badRequest('Invalid username or password'))
   }
 
-  const ssid = Math.random().toString(36).substring(7)
+  const sid = Math.random().toString(36).substring(7)
 
-  // Store sessions
-  userSessions[email] = ssid
+  request.server.app.cache.set(sid, { account: account }, 0, (err) => {
 
-  return reply({
-    message: 'success',
-    ssid: ssid
-  })
+    if (err) {
+      return reply(err);
+    }
 
-  // }
-
-  // else {
-  //
-  //   return reply(Boom.unauthorized('Invalid email or password'))
-  // }
+    request.cookieAuth.set({ sid: sid });
+    return reply({
+      message: 'success',
+      sid: sid
+    })
+  });
 }
 
 function handleCheckAuth(request, reply) {
 
-  const ssid = request.payload.ssid
+  const sid = request.payload.sid
   const userSessionValues = _.values(userSessions)
 
-  if (_.includes(userSessionValues, ssid)) {
+  if (_.includes(userSessionValues, sid)) {
 
     reply({
       message: 'authenticated'
@@ -80,13 +79,16 @@ function handleCheckAuth(request, reply) {
 }
 
 function handleLogout(request, reply) {
-  const ssid = request.payload.ssid
+  // const sid = request.payload.sid
+  //
+  // // Remove sid from sessions
+  // // TODO: use persistence
+  // userSessions = _.omit(userSessions, (value) => {
+  //   return value === sid
+  // })
 
-  // Remove ssid from sessions
-  // TODO: use persistence
-  userSessions = _.omit(userSessions, (value) => {
-    return value === ssid
-  })
+  console.log(request.cookieAuth)
+  request.cookieAuth.clear();
 
   reply({
     message: 'success'
@@ -114,16 +116,25 @@ export default [
     handler: handleCheckAuth
   },
   {
-    method: 'POST',
+    method: 'GET',
     path: '/api/auth/logout',
-    config: { auth: { mode: 'try' } },
     handler: handleLogout
   },
   {
-    method: 'GET`',
-    path: '/api/auth/testauthcookie',
-    handler: (request, response) => {
-      reply(request.auth.credentials)
+    method: 'GET',
+    path: '/api/auth/tryauth',
+    config: { auth: { mode: 'try' } },
+    handler: (request, reply) => {
+      console.log(request.auth)
+      reply('try auth')
+    }
+  },
+  {
+    method: 'GET',
+    path: '/api/auth/authenticated',
+    handler: (request, reply) => {
+      console.log(request.auth)
+      reply('authenticated')
     }
   },
 

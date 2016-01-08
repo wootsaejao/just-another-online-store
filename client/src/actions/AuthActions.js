@@ -27,7 +27,7 @@ function _login(email, password/*, cb*/) {
       .done((result) => {
         resolve({
           authenticated: true,
-          token: result.ssid
+          token: result.sid
         })
       })
       .fail((error) => {
@@ -49,10 +49,10 @@ export function login(email, password) {
         _login(email, password)
           .then((result) => {
             const token = result.token
-            localStorage.onlineStoreSSID = token
+            localStorage.onlineStoreSID = token
             resolve({
               isLoggedIn: true,
-              ssid: token
+              sid: token
             })
           })
           .catch((error) => {
@@ -67,14 +67,46 @@ export function login(email, password) {
   }
 }
 
+function _logout() {
+
+  return new Promise((resolve, reject) => {
+
+    jQuery.get('api/auth/logout')
+      .done((result) => {
+        console.log(result)
+        resolve({
+          authenticated: true,
+          token: result.sid
+        })
+      })
+      .fail((error) => {
+        console.log(error)
+        reject({
+          authenticated: false,
+          message: error.responseJSON.message
+        })
+      })
+
+  })
+}
+
 export function logout() {
   return {
     types: [LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE],
     promise: () => {
-      return new Promise((resolve/*, reject*/) => {
+      return new Promise((resolve, reject) => {
 
-        delete localStorage.onlineStoreSSID
-        resolve({})
+        _logout()
+          .then((result) => {
+            delete localStorage.onlineStoreSID
+            resolve({})
+          })
+          .catch((error) => {
+            reject({
+              message: error.message
+            })
+          })
+
       })
     }
   }
@@ -86,9 +118,9 @@ export function checkAuth() {
     promise: () => {
       return new Promise((resolve, reject) => {
 
-        if (!!localStorage.onlineStoreSSID) {
+        if (!!localStorage.onlineStoreSID) {
           resolve({
-            ssid: localStorage.onlineStoreSSID
+            sid: localStorage.onlineStoreSID
           })
         }
 

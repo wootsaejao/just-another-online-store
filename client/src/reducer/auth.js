@@ -5,6 +5,7 @@ import {
 
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 
   CHECK_AUTH_REQUEST,
   CHECK_AUTH_SUCCESS,
@@ -26,7 +27,7 @@ export function _auth(state = initialState, action) {
         ...state,
         loggingIn: false,
         isLoggedIn: action.result.isLoggedIn,
-        ssid: action.result.ssid,
+        sid: action.result.sid,
         error: false,
         message: null
       }
@@ -35,7 +36,7 @@ export function _auth(state = initialState, action) {
         ...state,
         loggingIn: false,
         isLoggedIn: false,
-        ssid: null,
+        sid: null,
         error: true,
         message: action.error.message
       }
@@ -49,7 +50,13 @@ export function _auth(state = initialState, action) {
         ...state,
         error: false,
         isLoggedIn: false,
-        ssid: null
+        sid: null
+      }
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        error: true,
+        message: action.error.message
       }
 
     case CHECK_AUTH_REQUEST:
@@ -60,14 +67,14 @@ export function _auth(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: true,
-        ssid: action.result.ssid,
+        sid: action.result.sid,
         message: null
       }
     case CHECK_AUTH_FAILURE:
       return {
         ...state,
         isLoggedIn: false,
-        ssid: null,
+        sid: null,
         message: null
       }
 
