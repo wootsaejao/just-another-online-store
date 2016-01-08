@@ -104,19 +104,19 @@ export default [
   {
     method: 'POST',
     path: '/api/auth/login',
-    config: {
-      auth: { mode: 'try' },
-      handler: handleLogin
-    }
+    config: { auth: { mode: 'try' } },
+    handler: handleLogin
   },
   {
     method: 'POST',
     path: '/api/auth/check',
+    config: { auth: { mode: 'try' } },
     handler: handleCheckAuth
   },
   {
     method: 'POST',
     path: '/api/auth/logout',
+    config: { auth: { mode: 'try' } },
     handler: handleLogout
   },
   {

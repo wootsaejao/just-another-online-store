@@ -79,8 +79,8 @@ describe('server', () => {
         }
       }
       server.inject(options, (response) => {
-        expect(response.statusCode).to.equal(401)
-        expect(response.result.message).to.equal('invalid password')
+        expect(response.statusCode).to.equal(400)
+        expect(response.result.message).to.equal('Invalid username or password')
         expect(response.result.ssid).to.not.exist
         done()
       })
