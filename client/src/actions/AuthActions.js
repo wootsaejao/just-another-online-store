@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import jQuery from 'jquery'
+import $ from 'jquery'
 
 import {
   LOGIN_REQUEST,
@@ -23,7 +23,7 @@ function _login(email, password/*, cb*/) {
 
   return new Promise((resolve, reject) => {
 
-    jQuery.post('api/auth/login', payload)
+    $.post('api/auth/login', payload)
       .done((result) => {
         resolve({
           token: result.sid
@@ -64,7 +64,7 @@ export function login(email, password) {
 function _logout() {
   return new Promise((resolve, reject) => {
 
-    jQuery.get('api/auth/logout')
+    $.get('api/auth/logout')
       .done((/*result*/) => {
         resolve()
       })
@@ -102,7 +102,7 @@ export function logout() {
 function _checkAuth(sid) {
   return new Promise((resolve, reject) => {
 
-    jQuery.post('api/auth/check', { sid: sid })
+    $.post('api/auth/check', { sid: sid })
       .done((/*result*/) => {
         resolve()
       })
