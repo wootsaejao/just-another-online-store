@@ -1,5 +1,3 @@
-import { UPDATE_PATH } from 'redux-simple-router'
-
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
