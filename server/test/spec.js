@@ -163,6 +163,7 @@ describe('server', () => {
         url: '/api/products',
       }
       server.inject(options, (response) => {
+        console.log(response.result)
         expect(response.statusCode).to.equal(200)
         done()
       })

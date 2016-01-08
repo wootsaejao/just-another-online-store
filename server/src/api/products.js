@@ -8,7 +8,7 @@ var db = new Datastore({ filename: productsDBPath })
 
 function handleGetProducts(request, reply) {
   db.loadDatabase((err) => {
-    db.find({}, (err, docs) => {
+    db.find({}).limit(2).exec((err, docs) => {
       reply(docs)
     })
   })
