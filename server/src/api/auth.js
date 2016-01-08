@@ -16,9 +16,6 @@ const users = {
 function handleLogin(request, reply) {
   // WARNING: this should be only used via HTTPS
 
-  let account = null
-  // console.log(request.auth)
-
   // alreay authenticated
   if (request.auth.isAuthenticated) {
 
