@@ -54,7 +54,7 @@ class App extends Component {
 
     require('./App.scss')
     return (
-      <div className="app">
+      <div className="App">
         {navbarInstance}
         <div className="container content">
           {this.props.children}
