@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Table } from 'react-bootstrap'
 
 export default class ProductRow extends Component {
   render() {
