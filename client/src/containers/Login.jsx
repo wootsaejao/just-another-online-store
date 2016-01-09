@@ -9,6 +9,7 @@ class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
+    // TODO: validate
     const email = this.refs.email.value
     const pass = this.refs.pass.value
 
@@ -40,7 +41,6 @@ class Login extends Component {
 function mapStateToProps(state) {
   return {
     isLoggedIn: state._auth.isLoggedIn,
-    error: state._auth.error,
     message: state._auth.message
   }
 }

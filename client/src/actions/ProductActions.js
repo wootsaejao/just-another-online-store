@@ -5,7 +5,7 @@ import {
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAILURE
-} from '../actionTypes'
+} from '../constants/ActionTypes'
 
 export function getProducts() {
   return {

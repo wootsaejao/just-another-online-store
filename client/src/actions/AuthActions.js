@@ -13,7 +13,7 @@ import {
   CHECK_AUTH_REQUEST,
   CHECK_AUTH_SUCCESS,
   CHECK_AUTH_FAILURE
-} from '../actionTypes'
+} from '../constants/ActionTypes'
 
 function _login(email, password/*, cb*/) {
   const payload = {

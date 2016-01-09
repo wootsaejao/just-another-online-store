@@ -6,15 +6,16 @@ import * as AuthActions from '../actions/AuthActions'
 class Logout extends Component {
 
   componentDidMount = (/*prevProps, prevState*/) => {
+
     //
-    // Do this so that user can logout via '/logout' url
+    // Do this way so user can logout via '/logout' url
     //
+
     this.props.actions.logout()
   }
 
   render() {
     return <p>You are now logged out.</p>
-
   }
 
 }
