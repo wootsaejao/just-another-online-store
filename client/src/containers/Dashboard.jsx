@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as ProductActions from '../actions/ProductActions'
 
-import Table from '../components/Table'
+import { ProductTable } from '../components'
 
 class Dashboard extends Component {
 
@@ -15,8 +15,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <div>I am a dashboard. You are logged in.</div>
-        <Table products={this.props.products} />
+        <ProductTable products={this.props.products} />
       </div>
     )
   }
