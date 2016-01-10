@@ -11,7 +11,7 @@ import {
 class App extends Component {
 
   render() {
-    const navbarInstance = (
+    const topNavbar = (
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
@@ -22,8 +22,8 @@ class App extends Component {
 
         <Navbar.Collapse>
           <Nav>
-            <LinkContainer to="/about">
-              <NavItem eventKey={1}>About</NavItem>
+            <LinkContainer to="/products">
+              <NavItem eventKey={1}>Products</NavItem>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>
@@ -33,6 +33,11 @@ class App extends Component {
     const footerInstant = (
       <Navbar>
         <Nav>
+          <LinkContainer to="/about">
+            <NavItem eventKey={1}>About</NavItem>
+          </LinkContainer>
+        </Nav>
+        <Nav> {/* TODO: pullRight */}
           {!this.props.isLoggedIn && (
             <LinkContainer to="/login">
               <NavItem eventKey={2}>Login</NavItem>
@@ -55,7 +60,7 @@ class App extends Component {
     require('./App.scss')
     return (
       <div className="App">
-        {navbarInstance}
+        {topNavbar}
         <div className="container content">
           {this.props.children}
         </div>

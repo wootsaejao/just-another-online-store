@@ -7,7 +7,11 @@ import { connect } from 'react-redux';
 class Home extends Component {
   render() {
     return (
-      <div>Sup! I am home page.</div>
+      <div>
+        <p>
+          Sup! I am home page. Here is some amazing promotion blah blah blah...
+        </p>
+      </div>
     )
   }
 }
