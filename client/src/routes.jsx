@@ -2,14 +2,17 @@ import React from 'react'
 import { Router, Route, IndexRoute } from 'react-router'
 
 import {
+  About,
+  NotFound
+} from './components'
+
+import {
   App,
   Home,
-  About,
-  Login,
-  Logout,
   Dashboard,
   Products,
-  NotFound
+  Login,
+  Logout
 } from './containers'
 
 export default (history, dispatch, getState) => {
