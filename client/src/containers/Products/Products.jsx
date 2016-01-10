@@ -15,7 +15,6 @@ class ProductColumn extends Component {
       'data:image/png;base64,' + this.props.product.image ||
       'http://placehold.it/250x120'
 
-
     require('./Products.scss')
     return (
       <div className="col-sm-4 col-lg-4 col-md-4">
