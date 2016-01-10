@@ -11,7 +11,7 @@ import { Root } from './containers'
 // load stuff first
 //
 
-// TODO: use CDN
+// TODO: use CDN so the bundle size will be reduced by ~ 400KB
 require('bootstrap/dist/css/bootstrap.min.css')
 
 
