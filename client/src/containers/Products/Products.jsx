@@ -8,19 +8,23 @@ import * as ProductActions from '../../actions/ProductActions'
 class ProductColumn extends Component {
   render() {
     var product = this.props.product
-    // limit to 82 chars
-    var desciption = product.description ||
+    var description = product.description ||
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    var shortDescription = _.trunc(description, 80) // limit to 80 chars
+    var imageUrl = !!this.props.product.image &&
+      'data:image/png;base64,' + this.props.product.image ||
+      'http://placehold.it/250x120'
+
 
     require('./Products.scss')
     return (
       <div className="col-sm-4 col-lg-4 col-md-4">
         <div className="ProductColumn thumbnail">
-          <img src="http://placehold.it/320x150" alt="" />
+          <img src={imageUrl} alt="" />
           <div className="caption">
             <h4 className="pull-right">${product.price}</h4>
             <h4 className="ProductName"><a href="#">{product.name}</a></h4>
-            <p className="ProductDescription">{_.trunc(desciption, 82)}</p>
+            <p className="ProductDescription">{shortDescription}</p>
           </div>
           <div className="ratings">
             <p className="pull-right">15 reviews</p>

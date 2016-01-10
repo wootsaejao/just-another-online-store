@@ -1,9 +1,15 @@
 .ProductColumn {
-  height: 285px;
+  height: 300px;
+  img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 120px;
+    width: auto;
+  }
   .ProductName {
     height: 36px;
   }
   .ProductDescription {
-    height: 55px;
+    height: 50px;
   }
 }
