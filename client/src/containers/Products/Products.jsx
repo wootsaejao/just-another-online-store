@@ -24,6 +24,9 @@ class Products extends Component {
       </div>
     )
 
+    // TODO: handle and filter products by category
+    const products = this.props.products
+
     return (
       <div className="container">
         <div className="row">
@@ -34,8 +37,8 @@ class Products extends Component {
 
           <div className="col-md-9">
             <div className="row">
-              {this.props.products.map((product) =>
-                <ProductColumn key={product._id} product={product} />
+              {products.map((item) =>
+                <ProductColumn key={item._id} product={item} />
               )}
             </div>
           </div>
