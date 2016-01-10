@@ -1,8 +1,42 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import * as ProductActions from '../../actions/ProductActions'
+
+class ProductColumn extends Component {
+  render() {
+    var product = this.props.product
+    // limit to 82 chars
+    var desciption = product.description ||
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+
+    require('./Products.scss')
+    return (
+      <div className="col-sm-4 col-lg-4 col-md-4">
+        <div className="ProductColumn thumbnail">
+          <img src="http://placehold.it/320x150" alt="" />
+          <div className="caption">
+            <h4 className="pull-right">${product.price}</h4>
+            <h4 className="ProductName"><a href="#">{product.name}</a></h4>
+            <p className="ProductDescription">{_.trunc(desciption, 82)}</p>
+          </div>
+          <div className="ratings">
+            <p className="pull-right">15 reviews</p>
+            <p>
+              <span className="glyphicon glyphicon-star"></span>
+              <span className="glyphicon glyphicon-star"></span>
+              <span className="glyphicon glyphicon-star"></span>
+              <span className="glyphicon glyphicon-star"></span>
+              <span className="glyphicon glyphicon-star-empty"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 
 class Products extends Component {
 
@@ -23,30 +57,6 @@ class Products extends Component {
       </div>
     )
 
-    const productBox = (
-      <div className="col-sm-4 col-lg-4 col-md-4">
-        <div className="thumbnail">
-          <img src="http://placehold.it/320x150" alt="" />
-            <div className="caption">
-              <h4 className="pull-right">$24.99</h4>
-              <h4><a href="#">First Product</a>
-            </h4>
-            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-          </div>
-          <div className="ratings">
-            <p className="pull-right">15 reviews</p>
-            <p>
-              <span className="glyphicon glyphicon-star"></span>
-              <span className="glyphicon glyphicon-star"></span>
-              <span className="glyphicon glyphicon-star"></span>
-              <span className="glyphicon glyphicon-star"></span>
-              <span className="glyphicon glyphicon-star"></span>
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-
     return (
       <div className="container">
         <div className="row">
@@ -54,11 +64,11 @@ class Products extends Component {
           <div className="col-md-3">
             {sideBar}
           </div>
-          
+
           <div className="col-md-9">
             <div className="row">
-              {this.props.products.map((item) =>
-                productBox
+              {this.props.products.map((product) =>
+                <ProductColumn key={product._id} product={product} />
               )}
             </div>
           </div>
