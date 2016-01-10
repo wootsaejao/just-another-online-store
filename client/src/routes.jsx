@@ -8,6 +8,7 @@ import {
   Login,
   Logout,
   Dashboard,
+  Products,
   NotFound
 } from './containers'
 
@@ -29,6 +30,7 @@ export default (history, dispatch, getState) => {
         <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
 
         { /* Public routes */ }
+        <Route path="products" component={Products} />
         <Route path="about" component={About} />
         <Route path="login" component={Login} />
         <Route path="logout" component={Logout} />
