@@ -16,8 +16,6 @@ config.plugins.unshift(
   new webpack.HotModuleReplacementPlugin()
 )
 
-console.log(port)
-
 config.devServer = {
   contentBase: config.output.path,
   publicPath: config.output.publicPath,

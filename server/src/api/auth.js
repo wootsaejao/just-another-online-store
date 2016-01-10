@@ -101,22 +101,4 @@ export default [
     handler: handleLogout
   },
 
-  {
-    method: 'GET',
-    path: '/api/auth/tryauth',
-    config: { auth: { mode: 'try' } },
-    handler: (request, reply) => {
-      console.log(request.auth)
-      reply('try auth')
-    }
-  },
-  {
-    method: 'GET',
-    path: '/api/auth/authenticated',
-    handler: (request, reply) => {
-      console.log(request.auth)
-      reply('authenticated')
-    }
-  },
-
 ]
