@@ -12,7 +12,7 @@ class Logout extends Component {
     //
 
     this.props.actions.logout()
-  }
+  };
 
   render() {
     return <p>You are now logged out.</p>

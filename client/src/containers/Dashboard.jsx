@@ -10,7 +10,7 @@ class Dashboard extends Component {
 
   componentWillMount = () => {
     this.props.actions.getProducts()
-  }
+  };
 
   render() {
     return (

@@ -9,7 +9,7 @@ class Root extends Component {
 
   componentWillMount = () => {
     this.props.actions.checkAuth()
-  }
+  };
 
   render() {
     const { store, routes } = this.props;

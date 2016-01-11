@@ -5,3 +5,4 @@ node_modules/
 tool/__build__
 server/database
 static/bundle.js
+coverage/

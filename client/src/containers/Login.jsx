@@ -14,7 +14,7 @@ class Login extends Component {
     const pass = this.refs.pass.value
 
     this.props.actions.login(email, pass)
-  }
+  };
 
   render() {
     return (

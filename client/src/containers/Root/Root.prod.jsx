@@ -8,7 +8,7 @@ class Root extends Component {
 
   componentWillMount = () => {
     this.props.actions.checkAuth()
-  }
+  };
 
   render() {
     const { store, routes } = this.props;
@@ -16,7 +16,7 @@ class Root extends Component {
       <Provider store={store}>
         {routes}
       </Provider>
-    );
+    )
   }
 }
 

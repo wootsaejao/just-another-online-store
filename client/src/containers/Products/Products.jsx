@@ -9,7 +9,7 @@ class Products extends Component {
 
   componentWillMount = () => {
     this.props.actions.getProducts()
-  }
+  };
 
   render() {
 
