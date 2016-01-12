@@ -9,7 +9,7 @@
     "dev": "npm run webpackDevServer & npm run hapiDevServer",
     "test": "NODE_ENV=production ./node_modules/.bin/_mocha test --recursive --compilers js:babel-register",
     "test:watch": "npm run test -- --watch",
-    "coverage": "NODE_ENV=production ./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- ./test/ --recursive",
+    "coveralls": "NODE_ENV=production ./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- ./test/ --recursive && ./node_modules/.bin/istanbul-coveralls",
     "build": "NODE_ENV=production webpack --config ./tool/webpack/webpack.config.js -p --progress",
     "start": "NODE_ENV=production node .",
     "postinstall": "npm run build"
@@ -63,8 +63,8 @@
     "eslint-plugin-react": "^3.11.3",
     "file-loader": "^0.8.5",
     "istanbul": "^1.0.0-alpha.2",
+    "istanbul-coveralls": "^1.0.3",
     "mocha": "^2.3.4",
-    "mocha-lcov-reporter": "^1.0.0",
     "node-sass": "^3.4.2",
     "nodemon": "^1.8.1",
     "react-hot-loader": "^1.3.0",
