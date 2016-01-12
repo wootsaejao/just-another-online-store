@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import startServer, { HapiAuthCookie } from '../src/server'
+import startServer, { HapiAuthCookie } from '../../src/server/server'
 
 let server
 

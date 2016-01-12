@@ -3,7 +3,7 @@ var path = require('path')
 
 module.exports = {
   entry: [
-    './client/src/index.jsx'
+    './src/client/client.jsx'
   ],
   module: {
     preLoaders: [
@@ -25,7 +25,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   output: {
-    path: path.resolve(__dirname, 'static'),
+    path: path.resolve(__dirname, '../../static'),
     publicPath: '/static/',
     filename: 'bundle.js'
   }

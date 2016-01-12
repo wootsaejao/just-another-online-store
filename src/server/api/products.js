@@ -5,7 +5,7 @@ import path from 'path'
 import Joi from 'joi'
 import _ from 'lodash'
 
-const productsDBPath = path.resolve(__dirname, '../../database/products.db')
+const productsDBPath = path.resolve(__dirname, '../../../database/products.db')
 var db = new Datastore({ filename: productsDBPath })
 
 function handleGetProducts(request, reply) {

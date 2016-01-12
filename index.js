@@ -4,7 +4,7 @@ require('babel-register')
 
 var PORT = process.env.PORT || 9990
 
-var startServer = require('./server/src/server.js')
+var startServer = require('./src/server/server.js')
 
 startServer(PORT, function (err, serverInstant) {
   if (err) {

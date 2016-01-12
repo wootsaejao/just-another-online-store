@@ -2,7 +2,6 @@ node_modules/
 .DS_Store
 *.log
 *.eot
-tool/__build__
-server/database
+tool/sample_product_generator/__build__
 static/bundle.js
 coverage/
